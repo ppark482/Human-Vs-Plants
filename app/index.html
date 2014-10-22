@@ -28,7 +28,12 @@
       </div> <!-- header bar end -->
 
       <div class="viewPort"> <!-- main view -->
-        <button id="startButton">Press Start</button>
+        <!-- This is where the templates populate -->
+
+        <button id="startButton" class="startButton">Start</button>
+
+
+
       </div> <!-- end viewPort -->
 
 
@@ -40,12 +45,17 @@
     </div> <!-- end of container -->
 
     <!-- begin template scripts -->
-<script type="text/template" id="intro">
-  <div class="intro">
-    <p>You are one of the last remaining survivors of the Plant-ocolypse of 2014.</p><p>Long story short, the plants have completely taken over the globe.</p><p>Kill them...<span>|</span></p>
-  </div>
-</script>
+      <script type="text/template" id="intro"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
+          <p>You are one of the last remaining survivors of the Plant-ocolypse of 2014.</p><p>Long story short, the plants have completely taken over the globe.</p><p>Kill them...<span>|</span></p>
+        </div>
+      </script>
 
+      <script type="text/template" id="charPicker"> <!-- displays characters to pick -->
+        <div class="charPicker">
+          
+        </div>
+      </script>
     <!-- end template scripts -->
 
 

@@ -30,7 +30,7 @@ h1 {
 
 /* ViewPort */
 .viewPort {
-  width: 80%;
+  width: 85%;
   height: 500px;
   margin: 2em auto;
   display: block;
@@ -59,7 +59,7 @@ h2 {
   }
 
   p:nth-child(3) {
-    animation: type2 18s steps(60, end);
+    animation: type2 18s steps(70, end);
   }
   span {
     color: lime;
