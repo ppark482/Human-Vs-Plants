@@ -1,0 +1,84 @@
+ // Bourbon & Neat
+@import '../../bower_components/bourbon/dist/bourbon';
+@import '../../bower_components/neat/app/assets/stylesheets/neat';
+
+// Custom Styles
+body {
+
+  background-image: url('../images/overgrowth-background.jpg');
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  overflow: hidden;
+}
+
+/* Header */
+.headUnit {
+  width: 100%;
+  height: 90px;
+  background-color: HSLA(0, 0%, 70%, 1);
+  display: block;
+  /* box-shadow: 2px 2px 1px HSLA(0, 0%, 89%, 1); */
+  opacity: .7;
+  font-size: 3em;
+  overflow: hidden;
+  position: static;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+/* ViewPort */
+.viewPort {
+  width: 80%;
+  height: 500px;
+  margin: 2em auto;
+  display: block;
+  background-color: black;
+  opacity: .8;
+}
+h2 {
+  font-size: 3em;
+}
+
+/* Typing Animation */
+.intro {
+  p {
+    color: lime;
+    font-family: "Courier";
+    font-size: 20px;
+    margin: 10px 0 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 80%;
+    animation: type 2s steps(60, end);
+  }
+
+  p:nth-child(2) {
+    animation: type2 8s steps(80, end);
+  }
+
+  p:nth-child(3) {
+    animation: type2 18s steps(60, end);
+  }
+  span {
+    color: lime;
+    animation: blink 1s infinite;
+  }
+  @keyframes type{
+    from { width: 0; }
+  }
+
+  @keyframes type2{
+    0%{width: 0;}
+    50%{width: 0;}
+    100%{ width: 100; }
+  }
+
+  @keyframes blink{
+    to{opacity: .0;}
+  }
+  /* ::selection{
+    background: black;
+  } */
+}
