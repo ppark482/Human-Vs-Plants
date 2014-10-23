@@ -1,12 +1,13 @@
 /* Creating Characters ---------------------------------------------------------------------------------------------------*/
+var inflicted, enemy_health;
+
 var Human = function(options) {
   this.name = options.name;
   this.health = options.health;
   this.melee = function( target) {
 
     // Mutates target's health by 'inflicted' amount
-    var inflicted;
-    target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
+    enemy_health = target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
 
@@ -15,7 +16,6 @@ var Human = function(options) {
   this.ranged = function ( target) {
 
     // Mutates target's health by 'inflicted' amount
-    var inflicted;
     target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
@@ -53,7 +53,6 @@ var Plant = function(options) {
   this.melee = function (target) {
 
     // Mutates target's health by 'inflicted' amount
-    var inflicted;
     target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
     console.log('Damage inflicted = ' + inflicted);
     console.log('Player health = ' + target.health);
@@ -63,7 +62,6 @@ var Plant = function(options) {
   this.ranged = function (target) {
 
     // Mutates target's health by 'inflicted' amount
-    var inflicted;
     target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
     console.log('Damage inflicted = ' + inflicted);
     console.log('Player health = ' + target.health);
@@ -158,13 +156,14 @@ $('body').on('click', '.ready', function(event) {
 $('body').on('click', '.atk1', function(event) {
   event.preventDefault();
   julius.melee(p1);
-  p1.melee(julius);
+  p1.melee(julius)
+  $('.battleLog').prepend('Caesar attacks with a Sword. He does ' + inflicted + ' damage to ' +  p1.name + '. ');
 });
 
 $('body').on('click', '.atk2', function(event) {
   event.preventDefault();
   julius.ranged(p1);
-  p1.ranged(julius);
+  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + p1.name + '. ');
 });
 
 

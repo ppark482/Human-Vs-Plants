@@ -167,3 +167,14 @@ h4 {
   height: 25%;
   display: block;
 }
+
+.battleLog {
+  background-color: HSLA(0, 0%, 0%, 1);
+  border: 1px solid HSLA(0, 0%, 97%, 1);
+  color: lime;
+  width: 500px;
+  height: 150px;
+  display: block;
+  float: right;
+  overflow: scroll;
+}
