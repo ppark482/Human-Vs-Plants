@@ -30,18 +30,8 @@
       <div class="viewPort"> <!-- main view -->
         <!-- This is where the templates populate -->
 
-        <!-- <button id="startButton" class="startButton">Start</button> -->
-        <div class="charPicker">
-          <div class="caesar">
-            <img class="profilePic" src="../images/caesar-headshot.jpg" />
-          </div>
-          <div class="abe">
-            <img class="profilePic" src="../images/lincoln-headshot.jpg" />
-          </div>
-          <div class="barbie">
-            <img class="profilePic" src="../images/barbie-headshot.jpeg" />
-          </div>
-        </div>
+        <button id="startButton" class="startButton">Start</button>
+
 
 
       </div> <!-- end viewPort -->
@@ -57,14 +47,28 @@
     <!-- begin template scripts -->
       <script type="text/template" id="intro"> <!-- provides introduction text after pressing start button -->
         <div class="intro">
-          <p>You are one of the last remaining survivors of the Plant-ocolypse of 2014.</p><p>Long story short, the plants have completely taken over the globe.</p><p>Kill them...<span>|</span></p>
+          <p>You are one of the last remaining survivors of the Plant-ocolypse of 2014.</p><p>Long story short, the plants have completely taken over the globe.</p><p>Kill them...<span>|</span></p><p>[Press Enter]</p>
         </div>
       </script>
 
       <script type="text/template" id="charPicker"> <!-- displays characters to pick -->
-        <div class="charPicker">
-
-        </div>
+        <div class="charPicker"> <!-- begin character picker -->
+          <div class="charWrap"> <!-- begin character wrap -->
+            <h2>PICK YOUR CHARACTER:</h2>
+            <div class="caesar" id="caesar">
+              <img class="profilePic" src="../images/caesar-headshot.jpg" />
+              <h4>Caesar</h4>
+            </div>
+            <div class="abe">
+              <img class="profilePic" src="../images/lincoln-headshot.jpg" />
+              <h4>Abraham</h4>
+            </div>
+            <div class="barbie">
+              <img class="profilePic" src="../images/barbie-headshot.jpeg" />
+              <h4>Barbie</h4>
+            </div>
+          </div> <!-- end character wrap -->
+        </div> <!-- end character picker -->
       </script>
     <!-- end template scripts -->
 

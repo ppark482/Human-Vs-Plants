@@ -11,8 +11,8 @@ var barbie = new Humans('Barbie', 100, 5, 15); // Creates Defensive Character Ba
 
 
 /* Game Start Up */
-var introTemplate = $('#intro').html(),
-    introRender = _.template(introTemplate);
+var introTemplate = $('#intro').html();
+    // introRender = _.template(introTemplate);
 
 
 $('#startButton').on('click', function() { // Start Button
@@ -24,7 +24,7 @@ $('#startButton').on('click', function() { // Start Button
   $(window).keypress(function(k) {
     if (k.keyCode > 0) {
       $('.viewPort p').css('animation', '0');
-    };
+    }
   });
 });
 
@@ -32,4 +32,26 @@ $('#startButton').on('click', function() { // Start Button
 var charTemplate = $('#charPicker').html(),
     charRender = _.template(charTemplate);
 
-$('')
+$(window).keypress(function(k) {
+  if (k.keyCode === 13) {
+    $('.viewPort').html(charTemplate);
+  }
+});
+/* On click of character */
+$('body').on('click', '.caesar', function() { // User picks caesar
+  $('.abe').css('display', 'none');
+  $('.barbie').css('display', 'none');
+  $(this).css('transform', 'scale(1.2)').css('margin-left', '100px');
+});
+
+$('body').on('click', '.abe', function() { // User picks abe
+  $('.caesar').css('display', 'none');
+  $('.barbie').css('display', 'none');
+  $(this).css('transform', 'scale(1.2)').css('margin-left', '100px');
+});
+
+$('body').on('click', '.barbie', function() { // user picks barbie
+  $('.abe').css('display', 'none');
+  $('.caesar').css('display', 'none');
+  $(this).css('transform', 'scale(1.2)').css('margin-left', '100px');
+});
