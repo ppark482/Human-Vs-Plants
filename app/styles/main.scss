@@ -6,7 +6,7 @@
 body {
 
   background-image: url('../images/overgrowth-background.jpg');
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, serif;
   color: #333;
   overflow: hidden;
 }
@@ -172,8 +172,9 @@ h4 {
   background-color: HSLA(0, 0%, 0%, 1);
   border: 1px solid HSLA(0, 0%, 97%, 1);
   color: lime;
-  width: 500px;
-  height: 150px;
+  font-family: "Courier";
+  width: 700px;
+  height: 180px;
   display: block;
   float: right;
   overflow: scroll;

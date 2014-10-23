@@ -131,19 +131,16 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
   $('h4').text('Pick ' + barbie.name);
 });
 
-/* User Picks a Character to Use
+/* User Picks a Character to Use & Render Battle Screen
 ---------------------------------------------------------------------------------------------------*/
+var battleTemplate = $('#battleScreen').html();
+
 $('body').on('click', '.ready', function(event) {
   // Allows for clicking Character Name
   event.preventDefault();
   console.log('clicked');
-  // this needs to paste the next template in order to get ready to fight
+  $('.viewPort').html(battleTemplate);
 });
-
-/* Get ready to fight + Battle Screen
----------------------------------------------------------------------------------------------------*/
-
-
 
 /* Fight Logic
 ---------------------------------------------------------------------------------------------------*/
@@ -156,8 +153,13 @@ $('body').on('click', '.ready', function(event) {
 $('body').on('click', '.atk1', function(event) {
   event.preventDefault();
   julius.melee(p1);
-  p1.melee(julius)
   $('.battleLog').prepend('Caesar attacks with a Sword. He does ' + inflicted + ' damage to ' +  p1.name + '. ');
+  if (p1.health > 0) {
+    p1.melee(julius);
+    $('.battleLog').prepend(p1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
+  } else {
+    $('.battleLog').prepend(p1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+  }
 });
 
 $('body').on('click', '.atk2', function(event) {
