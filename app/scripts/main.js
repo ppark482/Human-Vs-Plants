@@ -14,10 +14,11 @@ var barbie = new Humans('Barbie', 100, 5, 15); // Creates Defensive Character Ba
 var introTemplate = $('#intro').html(),
     introRender = _.template(introTemplate);
 
+
 $('#startButton').on('click', function() { // Start Button
 
   // Start button on click displays intro message
-  $('.viewPort').html(introRender);
+  $('.viewPort').html(introTemplate);
 
   // If any key is pressed, the animation of intro message is stopped
   $(window).keypress(function(k) {

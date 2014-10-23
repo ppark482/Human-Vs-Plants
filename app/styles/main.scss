@@ -11,7 +11,7 @@ body {
   overflow: hidden;
 }
 
-/* Header */
+/* Header ------------------------------------------------------------------------------------------------ */
 .headUnit {
   width: 100%;
   height: 90px;
@@ -28,7 +28,7 @@ h1 {
   padding: 0;
 }
 
-/* ViewPort */
+/* ViewPort ---------------------------------------------------------------------------------------------- */
 .viewPort {
   width: 85%;
   height: 500px;
@@ -41,7 +41,7 @@ h2 {
   font-size: 3em;
 }
 
-/* Typing Animation */
+/* Typing Animation ------------------------------------------------------------------------------------- */
 .intro {
   p {
     color: lime;
@@ -81,4 +81,13 @@ h2 {
   /* ::selection{
     background: black;
   } */
+}
+
+/* Character Picker ---------------------------------------------------------------------------------- */
+.charPicker {
+  display: inline-block;
+  position: relative;
+}
+.profilePic {
+  width: 250px;
 }
