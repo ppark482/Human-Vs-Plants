@@ -34,8 +34,7 @@ h1 {
   height: 500px;
   margin: 2em auto;
   display: block;
-  background-color: black;
-  opacity: .8;
+  background-color: HSLA(0, 0%, 0%, .8);
 }
 h2 {
   font-size: 3em;
@@ -84,9 +83,6 @@ h2 {
   @keyframes blink{
     to{opacity: .0;}
   }
-  /* ::selection{
-    background: black;
-  } */
 }
 
 /* Character Picker ---------------------------------------------------------------------------------- */
@@ -113,8 +109,22 @@ h2 {
     filter: sepia(0%) blur(0px);
   }
 }
+.profilePicClicked {
+  width: 250px;
+  height: 250px;
+  border: 3px solid white;
+  transform: scale(1.2);
+  margin-left: 300px;
+}
+
 .caesar, .abe, .barbie {
   display: inline-block;
   float: left;
-  transition: transform .5s, margin .5s;
+  img {
+    transition: transform 1s, margin 1s;
+  }
+}
+h4 {
+  font-size: 1.5em;
+  text-align: center;
 }

@@ -1,16 +1,31 @@
-/* Creating Characters */
-var Humans = function(name, health, attack, defense) {
-  this.name = name;
-  this.health = health;
-  this.attack = attack;
-  this.defense = defense;
+/* Creating Characters ---------------------------------------------------------------------------------------------------*/
+var Human = function(options) {
+  this.name = options.name;
+  this.health = options.health;
+  this.attack = options.attack;
+  this.defense = options.defense;
 };
-var julius = new Humans('Julius', 150, 10, 10); // Creates Balanced Character Julius
-var abe = new Humans('Abe', 200, 15, 5); // Creates Offensive Character Abe
-var barbie = new Humans('Barbie', 100, 5, 15); // Creates Defensive Character Barbie
+var julius = new Human({ // Creates Balanced Character Julius
+  name: 'Julius',
+  health: 150,
+  attack: 10,
+  defense: 10
+});
+var abe = new Human({ // Creates Offensive Character Abe
+  name: 'Abe',
+  health: 200,
+  attack: 15,
+  defense: 5
+});
+var barbie = new Human({ // Creates Defensive Character Barbie
+  name: 'Barbie',
+  health: 100,
+  attack: 5,
+  defense: 15
+});
 
 
-/* Game Start Up */
+/* Game Start Up ---------------------------------------------------------------------------------------------------*/
 var introTemplate = $('#intro').html();
     // introRender = _.template(introTemplate);
 
@@ -28,7 +43,7 @@ $('#startButton').on('click', function() { // Start Button
   });
 });
 
-/* After intro text, character picker */
+/* After intro text, character picker ---------------------------------------------------------------------------------------------------*/
 var charTemplate = $('#charPicker').html(),
     charRender = _.template(charTemplate);
 
@@ -37,21 +52,37 @@ $(window).keypress(function(k) {
     $('.viewPort').html(charTemplate);
   }
 });
-/* On click of character */
-$('body').on('click', '.caesar', function() { // User picks caesar
+/* On click of character
+---------------------------------------------------------------------------------------------------*/
+$('body').on('click', '.caesar', function(event) { // User picks caesar
+  event.preventDefault();
   $('.abe').css('display', 'none');
   $('.barbie').css('display', 'none');
-  $(this).css('transform', 'scale(1.2)').css('margin-left', '100px');
+  $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
+  $('h4').text('Pick ' + julius.name).addClass('ready');
 });
 
-$('body').on('click', '.abe', function() { // User picks abe
+$('body').on('click', '.abe', function(event) { // User picks abe
+  event.preventDefault();
   $('.caesar').css('display', 'none');
   $('.barbie').css('display', 'none');
-  $(this).css('transform', 'scale(1.2)').css('margin-left', '100px');
+  $('.abe img').removeClass('profilePic').addClass('profilePicClicked');
+  $('h4').text('Pick ' + abe.name);
 });
 
-$('body').on('click', '.barbie', function() { // user picks barbie
+$('body').on('click', '.barbie', function(event) { // user picks barbie
+  event.preventDefault();
   $('.abe').css('display', 'none');
   $('.caesar').css('display', 'none');
-  $(this).css('transform', 'scale(1.2)').css('margin-left', '100px');
+  $('.barbie img').removeClass('profilePic').addClass('profilePicClicked');
+  $('h4').text('Pick ' + barbie.name);
+});
+
+/* User Picks a Character to Use
+---------------------------------------------------------------------------------------------------*/
+$('body').on('click', '.ready', function(event) {
+  event.preventDefault();
+  console.log('clicked');
+
+
 });
