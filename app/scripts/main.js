@@ -2,26 +2,77 @@
 var Human = function(options) {
   this.name = options.name;
   this.health = options.health;
-  this.attack = options.attack;
+  this.melee = function( target) {
+
+    // Mutates target's health by 'inflicted' amount
+    var inflicted;
+    target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
+    console.log(inflicted);
+
+  };
+  this.mdamage = options.mdamage;
+  this.ranged = function ( target) {
+
+    // Mutates target's health by 'inflicted' amount
+    var inflicted;
+    target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
+    console.log(inflicted);
+
+  }
+  this.rdamage = options.rdamage;
   this.defense = options.defense;
 };
+
 var julius = new Human({ // Creates Balanced Character Julius
   name: 'Julius',
-  health: 150,
-  attack: 10,
+  health: 200,
+  mdamage: 15,
+  rdamage: 5,
   defense: 10
 });
 var abe = new Human({ // Creates Offensive Character Abe
   name: 'Abe',
-  health: 200,
-  attack: 15,
+  health: 150,
+  mdamage: 10,
+  rdamage: 15,
   defense: 5
 });
 var barbie = new Human({ // Creates Defensive Character Barbie
   name: 'Barbie',
   health: 100,
-  attack: 5,
+  mdamage: 5,
+  rdamage: 10,
   defense: 15
+});
+
+var Plant = function(options) {
+  this.name = options.name;
+  this.health = options.health;
+  this.melee = function (target) {
+
+    // Mutates target's health by 'inflicted' amount
+    var inflicted;
+    target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
+    console.log(inflicted);
+
+  };
+  this.mdamage = options.mdamage;
+  this.ranged = function (target) {
+
+    // Mutates target's health by 'inflicted' amount
+    var inflicted;
+    target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
+    console.log(inflicted);
+
+  };
+  this.rdamage = options.rdamage;
+};
+
+var p1 = new Plant({
+  name: 'Toats McGoats',
+  health: 100,
+  mdamage: 10,
+  rdamage: 5
 });
 
 
@@ -81,8 +132,35 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
 /* User Picks a Character to Use
 ---------------------------------------------------------------------------------------------------*/
 $('body').on('click', '.ready', function(event) {
+  // Allows for clicking Character Name
   event.preventDefault();
   console.log('clicked');
+  // this needs to paste the next template in order to get ready to fight
+});
+
+/* Get ready to fight + Battle Screen
+---------------------------------------------------------------------------------------------------*/
+
+
+
+/* Fight Logic
+---------------------------------------------------------------------------------------------------*/
+var human, plant;
+
+$('body').on('click', '.atk1', function(event) {
+  event.preventDefault();
+
 
 
 });
+
+
+
+
+
+
+
+
+
+/* Victory/Loss Logic
+---------------------------------------------------------------------------------------------------*/
