@@ -7,7 +7,8 @@ var Human = function(options) {
     // Mutates target's health by 'inflicted' amount
     var inflicted;
     target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
-    console.log(inflicted);
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Enemy health = ' + target.health);
 
   };
   this.mdamage = options.mdamage;
@@ -16,7 +17,8 @@ var Human = function(options) {
     // Mutates target's health by 'inflicted' amount
     var inflicted;
     target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
-    console.log(inflicted);
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Enemy health = ' + target.health);
 
   }
   this.rdamage = options.rdamage;
@@ -53,7 +55,8 @@ var Plant = function(options) {
     // Mutates target's health by 'inflicted' amount
     var inflicted;
     target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
-    console.log(inflicted);
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Player health = ' + target.health);
 
   };
   this.mdamage = options.mdamage;
@@ -62,7 +65,8 @@ var Plant = function(options) {
     // Mutates target's health by 'inflicted' amount
     var inflicted;
     target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
-    console.log(inflicted);
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Player health = ' + target.health);
 
   };
   this.rdamage = options.rdamage;
@@ -145,16 +149,23 @@ $('body').on('click', '.ready', function(event) {
 
 /* Fight Logic
 ---------------------------------------------------------------------------------------------------*/
-var human, plant;
+// var player = new Human ({
+//   name:
+//
+//
+// });
 
 $('body').on('click', '.atk1', function(event) {
   event.preventDefault();
-
-
-
+  julius.melee(p1);
+  p1.melee(julius);
 });
 
-
+$('body').on('click', '.atk2', function(event) {
+  event.preventDefault();
+  julius.ranged(p1);
+  p1.ranged(julius);
+});
 
 
 
