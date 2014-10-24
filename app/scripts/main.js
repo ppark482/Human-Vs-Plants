@@ -110,67 +110,93 @@ $(window).keypress(function(k) {
 var player, dataName, dataHealth, dataMdamage, dataRdamage, dataDefense;
 
 $('body').on('click', '.caesar', function(event) { // User picks caesar
-  dataName = $('h4').data('name');
-  dataHealth = $('h4').data('health');
-  dataMdamage = $('h4').data('mdamage');
-  dataRdamage = $('h4').data('rdamage');
   player = new Human ({
-    name: dataName,
-    health:
-
+    name: $('.caesar h4').data('name'),
+    health: $('.caesar h4').data('health'),
+    mdamage: $('.caesar h4').data('mdamage'),
+    rdamage: $('.caesar h4').data('rdamage'),
+    defense: $('.caesar h4').data('defense')
   });
   event.preventDefault();
   $('.abe').css('display', 'none');
   $('.barbie').css('display', 'none');
   $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
-  $('h4').text('Pick ' + player.name).addClass('ready');
+  $('.caesar h4').text('Pick ' + player.name).addClass('ready');
 });
 
 $('body').on('click', '.abe', function(event) { // User picks abe
+  console.log('picked abe');
+  player = new Human ({
+    name: $('.abe h4').data('name'),
+    health: $('.abe h4').data('health'),
+    mdamage: $('.abe h4').data('mdamage'),
+    rdamage: $('.abe h4').data('rdamage'),
+    defense: $('.abe h4').data('defense')
+  });
   event.preventDefault();
   $('.caesar').css('display', 'none');
   $('.barbie').css('display', 'none');
   $('.abe img').removeClass('profilePic').addClass('profilePicClicked');
-  $('h4').text('Pick ' + abe.name);
+  $('.abe h4').text('Pick ' + player.name).addClass('ready');
 });
 
 $('body').on('click', '.barbie', function(event) { // user picks barbie
+  player = new Human ({
+    name: $('.barbie h4').data('name'),
+    health: $('.barbie h4').data('health'),
+    mdamage: $('.barbie h4').data('mdamage'),
+    rdamage: $('.barbie h4').data('rdamage'),
+    defense: $('.barbie h4').data('defense')
+  });
   event.preventDefault();
   $('.abe').css('display', 'none');
   $('.caesar').css('display', 'none');
   $('.barbie img').removeClass('profilePic').addClass('profilePicClicked');
-  $('h4').text('Pick ' + barbie.name);
+  $('.barbie h4').text('Pick ' + player.name).addClass('ready');
 });
 
 /* User Picks a Character to Use & Render Battle Screen
 ---------------------------------------------------------------------------------------------------*/
-var battleTemplate = $('#battleScreen').html();
+var battleTemplate = $('#battleScreen').html(),
+    battleRender = _.template(battleTemplate),
+    caesarImage = ('<img class="ggPic" src="../images/caesar-headshot.jpg" />'),
+    abeImage = ('<img class="ggPic" src="../images/lincoln-headshot.jpg" />'),
+    barbieImage = ('<img class="ggPic" src="../images/barbie-headshot.jpeg" />');
+
 
 $('body').on('click', '.ready', function(event) {
   // Allows for clicking Character Name
   event.preventDefault();
-  console.log('clicked');
-  $('.viewPort').html(battleTemplate);
+  $('.viewPort').html(battleRender);
+  $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '">' + player.name + '</h4>');
+  if (player.name === 'Julius') {
+    $('#ggFightImg').append(caesarImage);
+    } else if (player.name === 'Abe') {
+      $('#ggFightImg').append(abeImage);
+      } else {
+        $('#ggFightImg').append(barbieImage);
+        };
+  console.log(player);
 });
+
 
 /* Fight Logic
 ---------------------------------------------------------------------------------------------------*/
-// var player = new Human ({
-//   name:
-//
-// add property to h4, jQuery pull
-// data-health="" data-melee="" data-ranged=""
-// jquery grab data elememts
-// $('.class).data("health") will equal 50
-// });
 
 $('body').on('click', '.atk1', function(event) {
   event.preventDefault();
-  julius.melee(enemy1);
-  $('.battleLog').prepend(julius.name + ' attacks with a Sword. He does ' + inflicted + ' damage to ' +  enemy1.name + '. ');
+  player = new Human ({
+    name: $('.ggHP h4').data('name'),
+    health: $('.ggHP h4').data('health'),
+    mdamage: $('.ggHP h4').data('mdamage'),
+    rdamage: $('.ggHP h4').data('rdamage'),
+    defense: $('.ggHP h4').data('defense')
+  });
+  player.melee(enemy1);
+  $('.battleLog').prepend(player.name + ' attacks with a Sword. He does ' + inflicted + ' damage to ' +  enemy1.name + '. ');
   if (enemy1.health > 0) {
-    enemy1.melee(julius);
-    $('.battleLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
+    enemy1.melee(player);
+    $('.battleLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
   } else {
     $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
   }
@@ -178,11 +204,11 @@ $('body').on('click', '.atk1', function(event) {
 
 $('body').on('click', '.atk2', function(event) {
   event.preventDefault();
-  julius.ranged(enemy1);
-  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + enemy.name + '. ');
+  player.ranged(enemy1);
+  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + enemy1.name + '. ');
   if (enemy1.health > 0) {
     enemy1.ranged(julius);
-    $('.battleLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
+    $('.battleLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
   } else {
     $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
   }
