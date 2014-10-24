@@ -1,23 +1,178 @@
-var userName = prompt('What is your name?');
+/* Creating Characters ---------------------------------------------------------------------------------------------------*/
+var inflicted, enemy_health;
 
-var Humans = function () {
-  name: userName,
+var Human = function(options) {
+  this.name = options.name;
+  this.health = options.health;
+  this.melee = function( target) {
+
+    // Mutates target's health by 'inflicted' amount
+    enemy_health = target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Enemy health = ' + target.health);
+
+  };
+  this.mdamage = options.mdamage;
+  this.ranged = function ( target) {
+
+    // Mutates target's health by 'inflicted' amount
+    target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Enemy health = ' + target.health);
+
+  }
+  this.rdamage = options.rdamage;
+  this.defense = options.defense;
 };
 
-var julius = new Humans () { // Creates Balanced Character Julius
-  this.health: 150,
-  this.attack: 10,
-  this.defense: 10
+var julius = new Human({ // Creates Balanced Character Julius
+  name: 'Julius',
+  health: 200,
+  mdamage: 15,
+  rdamage: 5,
+  defense: 10
+});
+var abe = new Human({ // Creates Offensive Character Abe
+  name: 'Abe',
+  health: 150,
+  mdamage: 10,
+  rdamage: 15,
+  defense: 5
+});
+var barbie = new Human({ // Creates Defensive Character Barbie
+  name: 'Barbie',
+  health: 100,
+  mdamage: 5,
+  rdamage: 10,
+  defense: 15
+});
+
+var Plant = function(options) {
+  this.name = options.name;
+  this.health = options.health;
+  this.melee = function (target) {
+
+    // Mutates target's health by 'inflicted' amount
+    target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Player health = ' + target.health);
+
+  };
+  this.mdamage = options.mdamage;
+  this.ranged = function (target) {
+
+    // Mutates target's health by 'inflicted' amount
+    target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
+    console.log('Damage inflicted = ' + inflicted);
+    console.log('Player health = ' + target.health);
+
+  };
+  this.rdamage = options.rdamage;
 };
 
-var george = new Humans () { // Creates Offensive Character George
-  this.health: 200,
-  this.attack: 15,
-  this.defense: 5
-};
+var p1 = new Plant({
+  name: 'Toats McGoats',
+  health: 100,
+  mdamage: 10,
+  rdamage: 5
+});
 
-var barbie = new Humans () { // Creates Defensive Character Barbie
-  this.health: 100,
-  this.attack: 5,
-  this.defense: 15
-};
+
+/* Game Start Up ---------------------------------------------------------------------------------------------------*/
+var introTemplate = $('#intro').html();
+    // introRender = _.template(introTemplate);
+
+
+$('#startButton').on('click', function() { // Start Button
+
+  // Start button on click displays intro message
+  $('.viewPort').html(introTemplate);
+
+  // If any key is pressed, the animation of intro message is stopped
+  $(window).keypress(function(k) {
+    if (k.keyCode > 0) {
+      $('.viewPort p').css('animation', '0');
+    }
+  });
+});
+
+/* After intro text, character picker ---------------------------------------------------------------------------------------------------*/
+var charTemplate = $('#charPicker').html(),
+    charRender = _.template(charTemplate);
+
+$(window).keypress(function(k) {
+  if (k.keyCode === 13) {
+    $('.viewPort').html(charTemplate);
+  }
+});
+/* On click of character
+---------------------------------------------------------------------------------------------------*/
+$('body').on('click', '.caesar', function(event) { // User picks caesar
+  event.preventDefault();
+  $('.abe').css('display', 'none');
+  $('.barbie').css('display', 'none');
+  $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
+  $('h4').text('Pick ' + julius.name).addClass('ready');
+});
+
+$('body').on('click', '.abe', function(event) { // User picks abe
+  event.preventDefault();
+  $('.caesar').css('display', 'none');
+  $('.barbie').css('display', 'none');
+  $('.abe img').removeClass('profilePic').addClass('profilePicClicked');
+  $('h4').text('Pick ' + abe.name);
+});
+
+$('body').on('click', '.barbie', function(event) { // user picks barbie
+  event.preventDefault();
+  $('.abe').css('display', 'none');
+  $('.caesar').css('display', 'none');
+  $('.barbie img').removeClass('profilePic').addClass('profilePicClicked');
+  $('h4').text('Pick ' + barbie.name);
+});
+
+/* User Picks a Character to Use & Render Battle Screen
+---------------------------------------------------------------------------------------------------*/
+var battleTemplate = $('#battleScreen').html();
+
+$('body').on('click', '.ready', function(event) {
+  // Allows for clicking Character Name
+  event.preventDefault();
+  console.log('clicked');
+  $('.viewPort').html(battleTemplate);
+});
+
+/* Fight Logic
+---------------------------------------------------------------------------------------------------*/
+// var player = new Human ({
+//   name:
+//
+//
+// });
+
+$('body').on('click', '.atk1', function(event) {
+  event.preventDefault();
+  julius.melee(p1);
+  $('.battleLog').prepend('Caesar attacks with a Sword. He does ' + inflicted + ' damage to ' +  p1.name + '. ');
+  if (p1.health > 0) {
+    p1.melee(julius);
+    $('.battleLog').prepend(p1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
+  } else {
+    $('.battleLog').prepend(p1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+  }
+});
+
+$('body').on('click', '.atk2', function(event) {
+  event.preventDefault();
+  julius.ranged(p1);
+  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + p1.name + '. ');
+});
+
+
+
+
+
+
+
+/* Victory/Loss Logic
+---------------------------------------------------------------------------------------------------*/
