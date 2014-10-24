@@ -54,15 +54,15 @@
             <h2>PICK YOUR CHARACTER:</h2>
             <div class="caesar" id="caesar">
               <img class="profilePic" src="../images/caesar-headshot.jpg" />
-              <h4>Caesar</h4>
+              <h4 data-name="Julius" data-health="200" data-mdamage="15" data-rdamage="5" data-defense="10">Caesar</h4>
             </div>
-            <div class="abe">
+            <div class="abe" id="abe">
               <img class="profilePic" src="../images/lincoln-headshot.jpg" />
-              <h4>Abraham</h4>
+              <h4 data-name="Abe" data-health="150" data-mdamage="10" data-rdamage="15" data-defense="5">Abraham</h4>
             </div>
-            <div class="barbie">
+            <div class="barbie" id="barbie">
               <img class="profilePic" src="../images/barbie-headshot.jpeg" />
-              <h4>Barbie</h4>
+              <h4 data-name="Barbie" data-health="100" data-mdamage="5" data-rdamage="10" data-defense="15">Barbie</h4>
             </div>
           </div> <!-- end character wrap -->
         </div> <!-- end character picker -->
@@ -86,8 +86,8 @@
           </div> <!-- end of upper portion of the battle screen -->
           <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
             <div class="atkOptions">
-              <button class="atk1">Attack: Sword</button>
-              <button class="atk2">Attack: Javelin</button>
+              <button class="atk1" id="melee">Attack: Melee</button>
+              <button class="atk2" id="ranged">Attack: Ranged</button>
             </div>
             <div class="battleLog">
             </div>

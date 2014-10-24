@@ -25,27 +25,27 @@ var Human = function(options) {
   this.defense = options.defense;
 };
 
-var julius = new Human({ // Creates Balanced Character Julius
-  name: 'Julius',
-  health: 200,
-  mdamage: 15,
-  rdamage: 5,
-  defense: 10
-});
-var abe = new Human({ // Creates Offensive Character Abe
-  name: 'Abe',
-  health: 150,
-  mdamage: 10,
-  rdamage: 15,
-  defense: 5
-});
-var barbie = new Human({ // Creates Defensive Character Barbie
-  name: 'Barbie',
-  health: 100,
-  mdamage: 5,
-  rdamage: 10,
-  defense: 15
-});
+// var julius = new Human({ // Creates Balanced Character Julius
+//   name: 'Julius',
+//   health: 200,
+//   mdamage: 15,
+//   rdamage: 5,
+//   defense: 10
+// });
+// var abe = new Human({ // Creates Offensive Character Abe
+//   name: 'Abe',
+//   health: 150,
+//   mdamage: 10,
+//   rdamage: 15,
+//   defense: 5
+// });
+// var barbie = new Human({ // Creates Defensive Character Barbie
+//   name: 'Barbie',
+//   health: 100,
+//   mdamage: 5,
+//   rdamage: 10,
+//   defense: 15
+// });
 
 var Plant = function(options) {
   this.name = options.name;
@@ -70,7 +70,7 @@ var Plant = function(options) {
   this.rdamage = options.rdamage;
 };
 
-var p1 = new Plant({
+var enemy1 = new Plant({
   name: 'Toats McGoats',
   health: 100,
   mdamage: 10,
@@ -107,12 +107,23 @@ $(window).keypress(function(k) {
 });
 /* On click of character
 ---------------------------------------------------------------------------------------------------*/
+var player, dataName, dataHealth, dataMdamage, dataRdamage, dataDefense;
+
 $('body').on('click', '.caesar', function(event) { // User picks caesar
+  dataName = $('h4').data('name');
+  dataHealth = $('h4').data('health');
+  dataMdamage = $('h4').data('mdamage');
+  dataRdamage = $('h4').data('rdamage');
+  player = new Human ({
+    name: dataName,
+    health:
+
+  });
   event.preventDefault();
   $('.abe').css('display', 'none');
   $('.barbie').css('display', 'none');
   $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
-  $('h4').text('Pick ' + julius.name).addClass('ready');
+  $('h4').text('Pick ' + player.name).addClass('ready');
 });
 
 $('body').on('click', '.abe', function(event) { // User picks abe
@@ -147,25 +158,34 @@ $('body').on('click', '.ready', function(event) {
 // var player = new Human ({
 //   name:
 //
-//
+// add property to h4, jQuery pull
+// data-health="" data-melee="" data-ranged=""
+// jquery grab data elememts
+// $('.class).data("health") will equal 50
 // });
 
 $('body').on('click', '.atk1', function(event) {
   event.preventDefault();
-  julius.melee(p1);
-  $('.battleLog').prepend('Caesar attacks with a Sword. He does ' + inflicted + ' damage to ' +  p1.name + '. ');
-  if (p1.health > 0) {
-    p1.melee(julius);
-    $('.battleLog').prepend(p1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
+  julius.melee(enemy1);
+  $('.battleLog').prepend(julius.name + ' attacks with a Sword. He does ' + inflicted + ' damage to ' +  enemy1.name + '. ');
+  if (enemy1.health > 0) {
+    enemy1.melee(julius);
+    $('.battleLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
   } else {
-    $('.battleLog').prepend(p1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+    $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
   }
 });
 
 $('body').on('click', '.atk2', function(event) {
   event.preventDefault();
-  julius.ranged(p1);
-  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + p1.name + '. ');
+  julius.ranged(enemy1);
+  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + enemy.name + '. ');
+  if (enemy1.health > 0) {
+    enemy1.ranged(julius);
+    $('.battleLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  julius.name + '. ');
+  } else {
+    $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+  }
 });
 
 
