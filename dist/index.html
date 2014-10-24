@@ -19,21 +19,73 @@
         <h1>human vs. PLANTS</h1>
       </div> <!-- header bar end -->
 
-      <div class="viewPort">
-        <div class="intro">
-          <p>You are one of the last remaining survivors of the Plant-ocolypse of 2014.</p><p>Long story short, the plants have completely taken over the globe.</p><p>Kill them...<span>|</span></p>
-        </div>
+      <div class="viewPort"> <!-- main view -->
+
+<!-- +++++++++++ VIEWPORT +++++++++++++ This is where the templates populate +++++++++++++ VIEWPORT +++++++++++++++++++++++ -->
+
+        <button id="startButton" class="startButton">Start</button>
+
+
+
+
+<!-- +++++++++++ VIEWPORT +++++++++++++ This is where the templates populate +++++++++++++ VIEWPORT +++++++++++++++++++++++ -->
+
       </div> <!-- end viewPort -->
-
-
-
-
-
-
-
     </div> <!-- end of container -->
 
     <!-- begin template scripts -->
+      <script type="text/template" id="intro"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
+          <p>You are one of the last remaining survivors of the Plant-ocolypse of 2014.</p><p>Long story short, the plants have completely taken over the globe.</p><p>Kill them...<span>|</span></p><p>[Press Enter]</p>
+        </div>
+      </script>
+
+      <script type="text/template" id="charPicker"> <!-- displays characters to pick -->
+        <div class="charPicker"> <!-- begin character picker -->
+          <div class="charWrap"> <!-- begin character wrap -->
+            <h2>PICK YOUR CHARACTER:</h2>
+            <div class="caesar" id="caesar">
+              <img class="profilePic" src="../images/caesar-headshot.jpg" />
+              <h4>Caesar</h4>
+            </div>
+            <div class="abe">
+              <img class="profilePic" src="../images/lincoln-headshot.jpg" />
+              <h4>Abraham</h4>
+            </div>
+            <div class="barbie">
+              <img class="profilePic" src="../images/barbie-headshot.jpeg" />
+              <h4>Barbie</h4>
+            </div>
+          </div> <!-- end character wrap -->
+        </div> <!-- end character picker -->
+      </script>
+
+      <script type="text/template" id="battleScreen">
+        <div class="battleScreen"> <!-- Battle Screen Start -->
+          <div class="battleUpper"> <!-- Upper portion of the Battle Screen -->
+            <div class="ggBattle">
+              <div class="ggHP"><span></span></div>
+              <div><img class="ggPic" src="../images/caesar-headshot.jpg" /></div>
+            </div>
+            <div class="stageSet">
+              <h2>Stage 1</h2>
+              <h3>VS</h3>
+            </div>
+            <div class="bgBattle">
+              <div class="bgHP"></div>
+              <div><img class="bgPic" src="../images/plant1.png" alt=""></div>
+            </div>
+          </div> <!-- end of upper portion of the battle screen -->
+          <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
+            <div class="atkOptions">
+              <button class="atk1">Attack: Sword</button>
+              <button class="atk2">Attack: Javelin</button>
+            </div>
+            <div class="battleLog">
+            </div>
+          </div><!-- end of lower portion of the battle screen -->
+        </div> <!-- battle screen end -->
+      </script>
 
 
     <!-- end template scripts -->
