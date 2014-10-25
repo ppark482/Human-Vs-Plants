@@ -96,6 +96,8 @@ h2 {
 }
 
 /* Character Picker ---------------------------------------------------------------------------------- */
+$charMargin: 67px;
+
 .charPicker {
   display: block;
   position: relative;
@@ -105,7 +107,8 @@ h2 {
   margin: 0 auto;
   overflow: auto;
   img {
-    margin-right: 100px;
+    margin-right: $charMargin;
+    margin-left: $charMargin;
   }
 }
 h2 {
@@ -127,7 +130,6 @@ h2 {
   height: 250px;
   border: 3px solid white;
   transform: scale(1.2);
-  margin-left: 300px;
 }
 
 .caesar, .abe, .barbie {

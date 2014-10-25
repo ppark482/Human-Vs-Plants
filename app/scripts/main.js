@@ -190,7 +190,7 @@ var onStage1Clear = function () {
 var enemy1 = new Plant({
   name: 'Vicious Vine Maple',
   health: 150,
-  mdamage: 300,
+  mdamage: 15,
   rdamage: 5
 });
 
@@ -339,7 +339,8 @@ var onBossClear = function () {
   setTimeout(endGameWin,10000);
 };
 
-var stageBossActivate = function () { // renders boss fight and stage
+var stageBossActivate = function () {
+  // renders boss fight and stage
   $('.viewPort').html(stageBoss);
   $('.atk1sB').append('Melee: ' + player.mweapon);
   $('.atk2sB').append('Ranged: ' + player.rweapon);
@@ -352,7 +353,8 @@ var stageBossActivate = function () { // renders boss fight and stage
         }
 };
 
-$('body').on('click', '.atk1sB', function(event) { // stage boss melee attack and result
+$('body').on('click', '.atk1sB', function(event) {
+  // stage boss melee attack and result
   event.preventDefault();
   player = new Human ({
     name: $('h1 span').data('name'),
@@ -367,7 +369,6 @@ $('body').on('click', '.atk1sB', function(event) { // stage boss melee attack an
   $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemyBoss.name + '. ').addClass('greenText');
   if (enemyBoss.health > 0) {
     enemyBoss.melee(player);
-    // $('.ggHP').css('padding-right','')
     $('.battleLog #eLog').prepend(enemyBoss.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
       $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
@@ -377,7 +378,8 @@ $('body').on('click', '.atk1sB', function(event) { // stage boss melee attack an
     }
 });
 
-$('body').on('click', '.atk2sB', function(event) { // stage boss range attack and result
+$('body').on('click', '.atk2sB', function(event) {
+  // stage boss range attack and result
   event.preventDefault();
   player = new Human ({
     name: $('h1 span').data('name'),
@@ -397,7 +399,8 @@ $('body').on('click', '.atk2sB', function(event) { // stage boss range attack an
       $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onBossClear,3000); // waits two seconds and then renders post boss stage screen
+      // waits two seconds and then renders post boss stage screen
+      setTimeout(onBossClear,3000);
     }
 });
 
