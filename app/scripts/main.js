@@ -72,12 +72,7 @@ var Plant = function(options) {
   this.rdamage = options.rdamage;
 };
 
-var enemy1 = new Plant({
-  name: 'Vicious Vine Maple',
-  health: 150,
-  mdamage: 10,
-  rdamage: 5
-});
+
 
 
 /* Game Start Up ---------------------------------------------------------------------------------------------------*/
@@ -192,7 +187,16 @@ $('body').on('click', '.ready', function(event) {
 
 /* Fight Logic
 ---------------------------------------------------------------------------------------------------*/
-
+var postS1 = $('#postS1').html();
+var onStage1Clear = function () {
+    $('.viewPort').html(postS1);
+};
+var enemy1 = new Plant({
+  name: 'Vicious Vine Maple',
+  health: 150,
+  mdamage: 10,
+  rdamage: 5
+});
 $('body').on('click', '.atk1', function(event) {
   event.preventDefault();
   player = new Human ({
@@ -214,6 +218,7 @@ $('body').on('click', '.atk1', function(event) {
       $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
+      setTimeout(onStage1Clear,2000);
     }
 });
 
@@ -236,6 +241,8 @@ $('body').on('click', '.atk2', function(event) {
   } else {
       $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
       $('.bgPic').fadeOut();
+      $('.battleLog').prepend("You've Won! ");
+      setTimeout(onStage1Clear,2000);
     }
 });
 
