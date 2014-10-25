@@ -171,21 +171,26 @@ var postStageOne = $('#postStageOne').html(),
     stageTwo = $('#stageTwo').html(),
     postStageTwo = $('#postStageTwo').html(),
     stageBoss = $('#stageBoss').html(),
-    postBoss = $('#postBoss').html();
+    postBoss = $('#postBoss').html(),
+    endGameWin = function () {
+      // refreshes the page after you win to start game over
+      document.location.reload(true);
+    };
+    endGameLose = function () {
+      // renders you lost
+      $('.viewPort').html(endGameLose);
+    };
 
-var onStage1Clear = function () { // after clearing stage one, renders stage two
+var onStage1Clear = function () {
+  // after clearing stage one, renders stage two
   $('.viewPort').html(postStageOne);
   setTimeout(stageTwoActivate,8000);
 };
-// var onStage2Clear = function () {
-//     $('.viewPort').html(postStageTwo);
-//     setTimeout( , 4000);
-// }
 
 var enemy1 = new Plant({
   name: 'Vicious Vine Maple',
   health: 150,
-  mdamage: 10,
+  mdamage: 300,
   rdamage: 5
 });
 
@@ -206,11 +211,15 @@ $('body').on('click', '.atk1', function(event) { // stage one melee attack and r
     enemy1.melee(player);
     // $('.ggHP').css('padding-right','')
     $('.battleLog #eLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+    if (player.health <= 0) {
+      $('.battleLog').prepend('You ded...');
+      setTimeout(endGameLose, 2000);
+    }
   } else {
       $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStage1Clear,2000);
+      setTimeout(onStage1Clear,3000);
     }
 });
 
@@ -230,11 +239,15 @@ $('body').on('click', '.atk2', function(event) { // stage one ranged attack and 
   if (enemy1.health > 0) {
     enemy1.ranged(player);
     $('.battleLog #eLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+    if (player.health <= 0) {
+      $('.battleLog').prepend('You ded...');
+      setTimeout(endGameLose, 4000);
+    }
   } else {
       $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStage1Clear,2000);
+      setTimeout(onStage1Clear,3000);
     }
 });
 
@@ -284,7 +297,7 @@ $('body').on('click', '.atk1s2', function(event) { // stage two melee attack and
       $('.battleLog').prepend(enemy2.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStage2Clear,2000);
+      setTimeout(onStage2Clear,3000);
     }
 });
 
@@ -308,7 +321,7 @@ $('body').on('click', '.atk2s2', function(event) { // stage 2 range attack and r
       $('.battleLog').prepend(enemy2.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStage2Clear,2000); // waits two seconds and then renders post stage 2 screen
+      setTimeout(onStage2Clear,3000); // waits two seconds and then renders post stage 2 screen
     }
 });
 
@@ -321,9 +334,9 @@ var enemyBoss = new Plant ({
   rdamage: 20
 });
 
-var onStage2Clear = function () {
-  $('.viewPort').html(postStageTwo);
-  setTimeout(stageBossActivate,8000);
+var onBossClear = function () {
+  $('.viewPort').html(postBoss);
+  setTimeout(endGameWin,7000);
 };
 
 var stageBossActivate = function () { // renders boss fight and stage
@@ -360,7 +373,7 @@ $('body').on('click', '.atk1sB', function(event) { // stage boss melee attack an
       $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStage2Clear,2000);
+      setTimeout(onBossClear,3000);
     }
 });
 
@@ -384,12 +397,9 @@ $('body').on('click', '.atk2sB', function(event) { // stage boss range attack an
       $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStageBossClear,2000); // waits two seconds and then renders post stage 2 screen
+      setTimeout(onBossClear,3000); // waits two seconds and then renders post boss stage screen
     }
 });
-
-
-
 
 /* Victory/Loss Logic
 ---------------------------------------------------------------------------------------------------*/
