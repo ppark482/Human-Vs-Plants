@@ -69,17 +69,13 @@ h2 {
 
   p:nth-child(2) {
     animation: type2 8s steps(80, end);
-    /* marquee-style: slide; */
   }
 
   p:nth-child(3) {
     animation: type2 18s steps(80, end);
-    /* marquee-style: slide; */
   }
   p:nth-child(4) {
     animation: type2 17s steps(2, end);
-    /* animation: type; */
-    /* marquee-style: slide; */
   }
   span {
     color: lime;
@@ -108,6 +104,9 @@ h2 {
 .charWrap {
   margin: 0 auto;
   overflow: auto;
+  img {
+    margin-right: 100px;
+  }
 }
 h2 {
   font-size: 2em;
@@ -209,7 +208,7 @@ h4 {
   margin-top: 10px;
   .atkOptions {
     clear: both;
-    .atk1, .atk2 {
+    .atk1, .atk2, .atk1s2, .atk2s2, .atk1sB, .atk2sB {
       width: 150px;
       height: 50px;
       padding: 0;

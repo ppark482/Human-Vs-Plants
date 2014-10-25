@@ -125,8 +125,8 @@
           </div> <!-- end of upper portion of the battle screen -->
           <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
             <div class="atkOptions">
-              <button class="atk1" id="melee"></button>
-              <button class="atk2" id="ranged"></button>
+              <button class="atk1s2" id="melee"></button>
+              <button class="atk2s2" id="ranged"></button>
               <div class="battleLog">
                 <span id="pLog"></span><span id="eLog"></span>
               </div>
@@ -135,7 +135,42 @@
         </div> <!-- battle screen end -->
       </script>
 
+      <script type="text/template" id="postStageTwo"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
+          <p>That was a close one, it almost got you.</p>
+          <p>This area looks to be pretty safe..........what's that sound?<span>|</span></p>
+        </div>
+      </script>
 
+      <script type="text/template" id="stageBoss">
+        <div class="battleScreen"> <!-- Battle Screen Start -->
+          <div class="battleUpper"> <!-- Upper portion of the Battle Screen -->
+            <div class="ggBattle">
+              <div class="ggHP">
+                <span>Health</span>
+              </div>
+              <div id="ggFightImg"></div>
+            </div>
+            <div class="stageSet">
+              <h2>BOSS</h2>
+              <h3>VS</h3>
+            </div>
+            <div class="bgBattle">
+              <div class="bgHP"></div>
+              <div><img class="bgPic" src="../images/plant1.png" alt=""></div>
+            </div>
+          </div> <!-- end of upper portion of the battle screen -->
+          <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
+            <div class="atkOptions">
+              <button class="atk1sB" id="melee"></button>
+              <button class="atk2sB" id="ranged"></button>
+              <div class="battleLog">
+                <span id="pLog"></span><span id="eLog"></span>
+              </div>
+            </div>
+          </div><!-- end of lower portion of the battle screen -->
+        </div> <!-- battle screen end -->
+      </script>
 
 
     <!-- end template scripts -->

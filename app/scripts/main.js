@@ -27,28 +27,6 @@ var Human = function(options) {
   this.rweapon = options.rweapon;
 };
 
-// var julius = new Human({ // Creates Balanced Character Julius
-//   name: 'Julius',
-//   health: 200,
-//   mdamage: 15,
-//   rdamage: 5,
-//   defense: 10
-// });
-// var abe = new Human({ // Creates Offensive Character Abe
-//   name: 'Abe',
-//   health: 150,
-//   mdamage: 10,
-//   rdamage: 15,
-//   defense: 5
-// });
-// var barbie = new Human({ // Creates Defensive Character Barbie
-//   name: 'Barbie',
-//   health: 100,
-//   mdamage: 5,
-//   rdamage: 10,
-//   defense: 15
-// });
-
 var Plant = function(options) {
   this.name = options.name;
   this.health = options.health;
@@ -159,7 +137,7 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
   $('.barbie h4').text('Pick ' + player.name).addClass('ready');
 });
 
-/* User Picks a Character to Use & Render Battle Screen
+/* User Picks a Character to Use & Render Battle Screen Stage 1
 ---------------------------------------------------------------------------------------------------*/
 var battleTemplate = $('#battleScreen').html(),
     battleRender = _.template(battleTemplate),
@@ -173,6 +151,7 @@ $('body').on('click', '.ready', function(event) {
   event.preventDefault();
   $('.viewPort').html(battleRender);
   $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</h4>');
+  $('h1').append('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
   $('.atk1').append('Melee: ' + player.mweapon);
   $('.atk2').append('Ranged: ' + player.rweapon);
   if (player.name === 'Julius') {
@@ -186,26 +165,22 @@ $('body').on('click', '.ready', function(event) {
 });
 
 
-/* Fight Logic
+/* Fight Logic Stage 1
 ---------------------------------------------------------------------------------------------------*/
 var postStageOne = $('#postStageOne').html(),
     stageTwo = $('#stageTwo').html(),
     postStageTwo = $('#postStageTwo').html(),
+    stageBoss = $('#stageBoss').html(),
     postBoss = $('#postBoss').html();
 
-var stageTwoActivate = function () {
-  $('.viewPort').html(stageTwo);
-};
-
-var onStage1Clear = function () {
-    $('.viewPort').html(postStageOne);
-    setTimeout(stageTwoActivate,8000);
+var onStage1Clear = function () { // after clearing stage one, renders stage two
+  $('.viewPort').html(postStageOne);
+  setTimeout(stageTwoActivate,8000);
 };
 // var onStage2Clear = function () {
 //     $('.viewPort').html(postStageTwo);
 //     setTimeout( , 4000);
 // }
-
 
 var enemy1 = new Plant({
   name: 'Vicious Vine Maple',
@@ -213,7 +188,8 @@ var enemy1 = new Plant({
   mdamage: 10,
   rdamage: 5
 });
-$('body').on('click', '.atk1', function(event) {
+
+$('body').on('click', '.atk1', function(event) { // stage one melee attack and result
   event.preventDefault();
   player = new Human ({
     name: $('.ggHP h4').data('name'),
@@ -238,7 +214,7 @@ $('body').on('click', '.atk1', function(event) {
     }
 });
 
-$('body').on('click', '.atk2', function(event) {
+$('body').on('click', '.atk2', function(event) { // stage one ranged attack and result
   event.preventDefault();
   player = new Human ({
     name: $('.ggHP h4').data('name'),
@@ -262,8 +238,155 @@ $('body').on('click', '.atk2', function(event) {
     }
 });
 
+/* Fight Logic Stage 2
+---------------------------------------------------------------------------------------------------*/
 
+var enemy2 = new Plant({ // Stage 2 enemy
+  name: 'Carnivorous Calylophus',
+  health: 300,
+  mdamage: 15,
+  rdamage: 15
+});
+var onStage2Clear = function () {
+  $('.viewPort').html(postStageTwo);
+  setTimeout(stageBossActivate,8000);
+};
+var stageTwoActivate = function () { // Renders stage two battle screen
+  $('.viewPort').html(stageTwo);
+  $('.atk1s2').append('Melee: ' + player.mweapon);
+  $('.atk2s2').append('Ranged: ' + player.rweapon);
+  if (player.name === 'Julius') {
+    $('#ggFightImg').append(caesarImage);
+    } else if (player.name === 'Abe') {
+      $('#ggFightImg').append(abeImage);
+      } else {
+        $('#ggFightImg').append(barbieImage);
+        }
+};
+$('body').on('click', '.atk1s2', function(event) { // stage two melee attack and result
+  event.preventDefault();
+  player = new Human ({
+    name: $('h1 span').data('name'),
+    health: $('h1 span').data('health'),
+    mdamage: $('h1 span').data('mdamage'),
+    rdamage: $('h1 span').data('rdamage'),
+    defense: $('h1 span').data('defense'),
+    mweapon: $('h1 span').data('mweapon'),
+    rweapon: $('h1 span').data('rweapon')
+  });
+  player.melee(enemy2);
+  $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy2.name + '. ').addClass('greenText');
+  if (enemy2.health > 0) {
+    enemy2.melee(player);
+    // $('.ggHP').css('padding-right','')
+    $('.battleLog #eLog').prepend(enemy2.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+  } else {
+      $('.battleLog').prepend(enemy2.name + ' is ded. ');
+      $('.bgPic').fadeOut();
+      $('.battleLog').prepend("You've Won! ");
+      setTimeout(onStage2Clear,2000);
+    }
+});
 
+$('body').on('click', '.atk2s2', function(event) { // stage 2 range attack and result
+  event.preventDefault();
+  player = new Human ({
+    name: $('h1 span').data('name'),
+    health: $('h1 span').data('health'),
+    mdamage: $('h1 span').data('mdamage'),
+    rdamage: $('h1 span').data('rdamage'),
+    defense: $('h1 span').data('defense'),
+    mweapon: $('h1 span').data('mweapon'),
+    rweapon: $('h1 span').data('rweapon')
+  });
+  player.ranged(enemy2);
+  $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy2.name + '. ');
+  if (enemy2.health > 0) {
+    enemy2.ranged(player);
+    $('.battleLog #eLog').prepend(enemy2.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+  } else {
+      $('.battleLog').prepend(enemy2.name + ' is ded. ');
+      $('.bgPic').fadeOut();
+      $('.battleLog').prepend("You've Won! ");
+      setTimeout(onStage2Clear,2000); // waits two seconds and then renders post stage 2 screen
+    }
+});
+
+/* Fight Logic Stage Boss
+---------------------------------------------------------------------------------------------------*/
+var enemyBoss = new Plant ({
+  name: "Boss Balsam Fir",
+  health: 500,
+  mdamage: 20,
+  rdamage: 20
+});
+
+var onStage2Clear = function () {
+  $('.viewPort').html(postStageTwo);
+  setTimeout(stageBossActivate,8000);
+};
+
+var stageBossActivate = function () { // renders boss fight and stage
+  $('.viewPort').html(stageBoss);
+  $('.atk1sB').append('Melee: ' + player.mweapon);
+  $('.atk2sB').append('Ranged: ' + player.rweapon);
+  if (player.name === 'Julius') {
+    $('#ggFightImg').append(caesarImage);
+    } else if (player.name === 'Abe') {
+      $('#ggFightImg').append(abeImage);
+      } else {
+        $('#ggFightImg').append(barbieImage);
+        }
+};
+
+$('body').on('click', '.atk1sB', function(event) { // stage boss melee attack and result
+  event.preventDefault();
+  player = new Human ({
+    name: $('h1 span').data('name'),
+    health: $('h1 span').data('health'),
+    mdamage: $('h1 span').data('mdamage'),
+    rdamage: $('h1 span').data('rdamage'),
+    defense: $('h1 span').data('defense'),
+    mweapon: $('h1 span').data('mweapon'),
+    rweapon: $('h1 span').data('rweapon')
+  });
+  player.melee(enemyBoss);
+  $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemyBoss.name + '. ').addClass('greenText');
+  if (enemyBoss.health > 0) {
+    enemyBoss.melee(player);
+    // $('.ggHP').css('padding-right','')
+    $('.battleLog #eLog').prepend(enemyBoss.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+  } else {
+      $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
+      $('.bgPic').fadeOut();
+      $('.battleLog').prepend("You've Won! ");
+      setTimeout(onStage2Clear,2000);
+    }
+});
+
+$('body').on('click', '.atk2sB', function(event) { // stage boss range attack and result
+  event.preventDefault();
+  player = new Human ({
+    name: $('h1 span').data('name'),
+    health: $('h1 span').data('health'),
+    mdamage: $('h1 span').data('mdamage'),
+    rdamage: $('h1 span').data('rdamage'),
+    defense: $('h1 span').data('defense'),
+    mweapon: $('h1 span').data('mweapon'),
+    rweapon: $('h1 span').data('rweapon')
+  });
+  player.ranged(enemyBoss);
+  $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemyBoss.name + '. ');
+  if (enemyBoss.health > 0) {
+    enemyBoss.ranged(player);
+    $('.battleLog #eLog').prepend(enemyBoss.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+  } else {
+      $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
+      $('.bgPic').fadeOut();
+      $('.battleLog').prepend("You've Won! ");
+      setTimeout(onStageBossClear,2000); // waits two seconds and then renders post stage 2 screen
+    }
+});
 
 
 
