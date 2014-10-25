@@ -98,11 +98,41 @@
         </div> <!-- battle screen end -->
       </script>
 
-      <script type="text/template" id="intro"> <!-- provides introduction text after pressing start button -->
-        <div id="postS1" class="intro">
+      <script type="text/template" id="postStageOne"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
           <p>You managed to get past that scary, scary plant.</p>
-          <p>But you see another one coming, get ready!<span>|</span></p>
+          <p>But, you see another one coming.... get ready!<span>|</span></p>
         </div>
+      </script>
+
+      <script type="text/template" id="stageTwo">
+        <div class="battleScreen"> <!-- Battle Screen Start -->
+          <div class="battleUpper"> <!-- Upper portion of the Battle Screen -->
+            <div class="ggBattle">
+              <div class="ggHP">
+                <span>Health</span>
+              </div>
+              <div id="ggFightImg"></div>
+            </div>
+            <div class="stageSet">
+              <h2>Stage 2</h2>
+              <h3>VS</h3>
+            </div>
+            <div class="bgBattle">
+              <div class="bgHP"></div>
+              <div><img class="bgPic" src="../images/plant1.png" alt=""></div>
+            </div>
+          </div> <!-- end of upper portion of the battle screen -->
+          <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
+            <div class="atkOptions">
+              <button class="atk1" id="melee"></button>
+              <button class="atk2" id="ranged"></button>
+              <div class="battleLog">
+                <span id="pLog"></span><span id="eLog"></span>
+              </div>
+            </div>
+          </div><!-- end of lower portion of the battle screen -->
+        </div> <!-- battle screen end -->
       </script>
 
 

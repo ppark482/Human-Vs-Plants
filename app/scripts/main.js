@@ -20,7 +20,7 @@ var Human = function(options) {
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
 
-  }
+  };
   this.rdamage = options.rdamage;
   this.defense = options.defense;
   this.mweapon = options.mweapon;
@@ -70,6 +70,7 @@ var Plant = function(options) {
 
   };
   this.rdamage = options.rdamage;
+  this.stage = options.stage;
 };
 
 
@@ -187,10 +188,25 @@ $('body').on('click', '.ready', function(event) {
 
 /* Fight Logic
 ---------------------------------------------------------------------------------------------------*/
-var postS1 = $('#postS1').html();
-var onStage1Clear = function () {
-    $('.viewPort').html(postS1);
+var postStageOne = $('#postStageOne').html(),
+    stageTwo = $('#stageTwo').html(),
+    postStageTwo = $('#postStageTwo').html(),
+    postBoss = $('#postBoss').html();
+
+var stageTwoActivate = function () {
+  $('.viewPort').html(stageTwo);
 };
+
+var onStage1Clear = function () {
+    $('.viewPort').html(postStageOne);
+    setTimeout(stageTwoActivate,8000);
+};
+// var onStage2Clear = function () {
+//     $('.viewPort').html(postStageTwo);
+//     setTimeout( , 4000);
+// }
+
+
 var enemy1 = new Plant({
   name: 'Vicious Vine Maple',
   health: 150,
