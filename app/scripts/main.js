@@ -76,6 +76,10 @@ $('#startButton').on('click', function() { // Start Button
 var charTemplate = $('#charPicker').html(),
     charRender = _.template(charTemplate);
 
+$('.profilePic').hover(function() {
+    $('h4').css('color', 'HSLA(0, 100%, 45%, 1)');
+});
+
 $(window).keypress(function(k) {
   if (k.keyCode === 13) {
     $('.viewPort').html(charTemplate);
