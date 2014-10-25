@@ -336,7 +336,7 @@ var enemyBoss = new Plant ({
 
 var onBossClear = function () {
   $('.viewPort').html(postBoss);
-  setTimeout(endGameWin,7000);
+  setTimeout(endGameWin,10000);
 };
 
 var stageBossActivate = function () { // renders boss fight and stage
