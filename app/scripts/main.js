@@ -16,13 +16,15 @@ var Human = function(options) {
   this.ranged = function ( target) {
 
     // Mutates target's health by 'inflicted' amount
-    target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
+    enemy_health = target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
 
   }
   this.rdamage = options.rdamage;
   this.defense = options.defense;
+  this.mweapon = options.mweapon;
+  this.rweapon = options.rweapon;
 };
 
 // var julius = new Human({ // Creates Balanced Character Julius
@@ -71,8 +73,8 @@ var Plant = function(options) {
 };
 
 var enemy1 = new Plant({
-  name: 'Toats McGoats',
-  health: 100,
+  name: 'Vicious Vine Maple',
+  health: 150,
   mdamage: 10,
   rdamage: 5
 });
@@ -115,7 +117,9 @@ $('body').on('click', '.caesar', function(event) { // User picks caesar
     health: $('.caesar h4').data('health'),
     mdamage: $('.caesar h4').data('mdamage'),
     rdamage: $('.caesar h4').data('rdamage'),
-    defense: $('.caesar h4').data('defense')
+    defense: $('.caesar h4').data('defense'),
+    mweapon: $('.caesar h4').data('mweapon'),
+    rweapon: $('.caesar h4').data('rweapon')
   });
   event.preventDefault();
   $('.abe').css('display', 'none');
@@ -131,7 +135,9 @@ $('body').on('click', '.abe', function(event) { // User picks abe
     health: $('.abe h4').data('health'),
     mdamage: $('.abe h4').data('mdamage'),
     rdamage: $('.abe h4').data('rdamage'),
-    defense: $('.abe h4').data('defense')
+    defense: $('.abe h4').data('defense'),
+    mweapon: $('.abe h4').data('mweapon'),
+    rweapon: $('.abe h4').data('rweapon')
   });
   event.preventDefault();
   $('.caesar').css('display', 'none');
@@ -146,7 +152,9 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
     health: $('.barbie h4').data('health'),
     mdamage: $('.barbie h4').data('mdamage'),
     rdamage: $('.barbie h4').data('rdamage'),
-    defense: $('.barbie h4').data('defense')
+    defense: $('.barbie h4').data('defense'),
+    mweapon: $('.barbie h4').data('mweapon'),
+    rweapon: $('.barbie h4').data('rweapon')
   });
   event.preventDefault();
   $('.abe').css('display', 'none');
@@ -168,14 +176,16 @@ $('body').on('click', '.ready', function(event) {
   // Allows for clicking Character Name
   event.preventDefault();
   $('.viewPort').html(battleRender);
-  $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '">' + player.name + '</h4>');
+  $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</h4>');
+  $('.atk1').append('Melee: ' + player.mweapon);
+  $('.atk2').append('Ranged: ' + player.rweapon);
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
     } else if (player.name === 'Abe') {
       $('#ggFightImg').append(abeImage);
       } else {
         $('#ggFightImg').append(barbieImage);
-        };
+        }
   console.log(player);
 });
 
@@ -190,28 +200,42 @@ $('body').on('click', '.atk1', function(event) {
     health: $('.ggHP h4').data('health'),
     mdamage: $('.ggHP h4').data('mdamage'),
     rdamage: $('.ggHP h4').data('rdamage'),
-    defense: $('.ggHP h4').data('defense')
+    defense: $('.ggHP h4').data('defense'),
+    mweapon: $('.ggHP h4').data('mweapon'),
+    rweapon: $('.ggHP h4').data('rweapon')
   });
   player.melee(enemy1);
-  $('.battleLog').prepend(player.name + ' attacks with a Sword. He does ' + inflicted + ' damage to ' +  enemy1.name + '. ');
+  $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
   if (enemy1.health > 0) {
     enemy1.melee(player);
-    $('.battleLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+    $('.battleLog #eLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
-    $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
-  }
+      $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+      $('.bgPic').fadeOut();
+      $('.battleLog').prepend("You've Won! ");
+    }
 });
 
 $('body').on('click', '.atk2', function(event) {
   event.preventDefault();
+  player = new Human ({
+    name: $('.ggHP h4').data('name'),
+    health: $('.ggHP h4').data('health'),
+    mdamage: $('.ggHP h4').data('mdamage'),
+    rdamage: $('.ggHP h4').data('rdamage'),
+    defense: $('.ggHP h4').data('defense'),
+    mweapon: $('.ggHP h4').data('mweapon'),
+    rweapon: $('.ggHP h4').data('rweapon')
+  });
   player.ranged(enemy1);
-  $('.battleLog').prepend('Caesar throws a Javalin. He does ' + inflicted + ' damage to ' + enemy1.name + '. ');
+  $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy1.name + '. ');
   if (enemy1.health > 0) {
-    enemy1.ranged(julius);
-    $('.battleLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+    enemy1.ranged(player);
+    $('.battleLog #eLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
   } else {
-    $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
-  }
+      $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+      $('.bgPic').fadeOut();
+    }
 });
 
 
