@@ -40,6 +40,16 @@ h2 {
   font-size: 3em;
 }
 
+.startButton {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url('../images/green.jpg');
+  border: 4px solid black;
+  color: black;
+  font-family: 'Courier';
+}
+
 /* Typing Animation ------------------------------------------------------------------------------------- */
 .intro {
   p {
@@ -140,6 +150,30 @@ h4 {
   float: left;
   width: 25%;
   overflow: auto;
+  .ggHP {
+  	height: 20px;  /* Can be anything */
+  	position: relative;
+  	background: #555;
+  	-moz-border-radius: 25px;
+  	-webkit-border-radius: 25px;
+  	border-radius: 25px;
+  	padding: 0px;
+    color: HSLA(0 , 0%, 0%, 0);
+  	-webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+  	-moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
+  	box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
+  }
+  .ggHP > span {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/green.jpg');
+    margin-left: 0px;
+    border-radius: 1em;
+    padding-right: 15em;
+    position: relative;
+    overflow: hidden;
+    transition: padding .3s;
+  }
   .ggPic {
     width: 250px;
     height: 250px;

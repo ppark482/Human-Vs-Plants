@@ -208,6 +208,7 @@ $('body').on('click', '.atk1', function(event) {
   $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
   if (enemy1.health > 0) {
     enemy1.melee(player);
+    // $('.ggHP').css('padding-right','')
     $('.battleLog #eLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
       $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
