@@ -1,16 +1,24 @@
-$("document").ready(function() { /* Ready Wrapper */
+$('document').ready(function() { /* Ready Wrapper */
 /* Creating Characters ---------------------------------------------------------------------------------------------------*/
-var inflicted, enemy_health;
+var inflicted, enemy_health, ofMaxHP, paddingDamage;
 
 var Human = function(options) {
   this.name = options.name;
   this.health = options.health;
+  this.maxHP = options.maxHP;
   this.melee = function( target) {
 
     // Mutates target's health by 'inflicted' amount
     enemy_health = target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
+    ofMaxHP = (inflicted/target.health); // percentage of damage dealt;
+    paddingDamage = ofMaxHP * 368; // amount to be taken away from hp padding value (adjusts length of hp bar)
+    newPadValue = 368 - paddingDamage;
+    $('.bgHP span').css('padding-right', newPadValue);
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
+    console.log(ofMaxHP);
+    console.log(paddingDamage);
+    console.log(newPadValue);
 
   };
   this.mdamage = options.mdamage;
@@ -31,6 +39,7 @@ var Human = function(options) {
 var Plant = function(options) {
   this.name = options.name;
   this.health = options.health;
+  this.maxHP = options.maxHP;
   this.melee = function (target) {
 
     // Mutates target's health by 'inflicted' amount
@@ -198,17 +207,9 @@ var onStage1Clear = function () {
 var enemy1 = new Plant({
   name: 'Vicious Vine Maple',
   health: 150,
-  mdamage: 15,
-  rdamage: 5
-});
-player = new Human ({
-  name: $('.headUnit span .invisible').data('name'),
-  health: $('.headUnit span .invisible').data('health'),
-  mdamage: $('.headUnit span .invisible').data('mdamage'),
-  rdamage: $('.headUnit span .invisible').data('rdamage'),
-  defense: $('.headUnit span .invisible').data('defense'),
-  mweapon: $('.headUnit span .invisible').data('mweapon'),
-  rweapon: $('.headUnit span .invisible').data('rweapon')
+  maxHP: 150,
+  mdamage: 15 + (_.random(5,10)),
+  rdamage: 5 + (_.random(2, 20))
 });
 $( document ).ready(function() {
     $('body').on('click', '.atk1', function(event) { // stage one melee attack and result
@@ -224,7 +225,7 @@ $( document ).ready(function() {
     });
     player.melee(enemy1);
     $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
-    $('.bgHP span').css('padding-right','350px');
+    $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
     if (enemy1.health > 0) {
       enemy1.melee(player);
       // $('.ggHP').css('padding-right','')
@@ -276,8 +277,9 @@ $('body').on('click', '.atk2', function(event) { // stage one ranged attack and 
 var enemy2 = new Plant({ // Stage 2 enemy
   name: 'Carnivorous Calylophus',
   health: 300,
-  mdamage: 15,
-  rdamage: 15
+  maxHP: 300,
+  mdamage: 15 + (_.random(5,10)),
+  rdamage: 15 + (_.random(5, 30))
 });
 var onStage2Clear = function () {
   $('.viewPort').html(postStageTwo);
@@ -356,8 +358,9 @@ $('body').on('click', '.atk2s2', function(event) { // stage 2 range attack and r
 var enemyBoss = new Plant ({
   name: "Boss Balsam Fir",
   health: 500,
-  mdamage: 20,
-  rdamage: 20
+  maxHP: 500,
+  mdamage: 20 + (_.random(30, 40)),
+  rdamage: 20 + (_.random(20, 100))
 });
 
 var onBossClear = function () {
