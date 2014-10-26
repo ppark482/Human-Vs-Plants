@@ -166,12 +166,15 @@ $('body').on('click', '.ready', function(event) {
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
     $('.vsGG').append('Caesar ');
+    $('.vsBG').append(' ' + enemy1.name);
     } else if (player.name === 'Abe') {
       $('#ggFightImg').append(abeImage);
       $('.vsGG').append('Abraham ');
+      $('.vsBG').append(' ' + enemy1.name);
       } else {
         $('#ggFightImg').append(barbieImage);
         $('.vsGG').append('Barbie ');
+        $('.vsBG').append(' ' + enemy1.name);
         }
   console.log(player);
 });
@@ -282,10 +285,16 @@ var stageTwoActivate = function () { // Renders stage two battle screen
   $('.atk2s2').append('Ranged: ' + player.rweapon);
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
+    $('.vsGG').append('Caesar ');
+    $('.vsBG').append(' ' + enemy2.name);
     } else if (player.name === 'Abe') {
       $('#ggFightImg').append(abeImage);
+      $('.vsGG').append('Abe ');
+      $('.vsBG').append(' ' + enemy2.name);
       } else {
         $('#ggFightImg').append(barbieImage);
+        $('.vsGG').append('Barbie ');
+        $('.vsBG').append(' ' + enemy2.name);
         }
 };
 $('body').on('click', '.atk1s2', function(event) { // stage two melee attack and result
@@ -358,10 +367,16 @@ var stageBossActivate = function () {
   $('.atk2sB').append('Ranged: ' + player.rweapon);
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
+    $('.vsGG').append('Caesar ');
+    $('.vsBG').append(' ' + enemyBoss.name);
     } else if (player.name === 'Abe') {
       $('#ggFightImg').append(abeImage);
+      $('.vsGG').append('Abe ');
+      $('.vsBG').append(' ' + enemyBoss.name);
       } else {
         $('#ggFightImg').append(barbieImage);
+        $('.vsGG').append('Barbie ');
+        $('.vsBG').append(' ' + enemyBoss.name);
         }
 };
 
