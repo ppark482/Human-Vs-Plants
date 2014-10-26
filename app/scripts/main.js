@@ -155,6 +155,7 @@ $('body').on('click', '.ready', function(event) {
   $('.headUnit span').html('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
   $('.atk1').append('Melee: ' + player.mweapon);
   $('.atk2').append('Ranged: ' + player.rweapon);
+  $('.battleLog #pLog').html('<--------- What will you do?');
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
     $('.vsGG').append('Caesar ');
@@ -214,6 +215,7 @@ $('body').on('click', '.atk1', function(event) { // stage one melee attack and r
   });
   player.melee(enemy1);
   $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
+  $('.bgHP span').css('padding-right','350px');
   if (enemy1.health > 0) {
     enemy1.melee(player);
     // $('.ggHP').css('padding-right','')
@@ -275,6 +277,7 @@ var stageTwoActivate = function () { // Renders stage two battle screen
   $('.viewPort').html(stageTwo);
   $('.atk1s2').append('Melee: ' + player.mweapon);
   $('.atk2s2').append('Ranged: ' + player.rweapon);
+  $('.battleLog #pLog').html('<--------- What will you do?');
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
     $('.vsGG').append('Caesar ');
@@ -357,6 +360,7 @@ var stageBossActivate = function () {
   $('.viewPort').html(stageBoss);
   $('.atk1sB').append('Melee: ' + player.mweapon);
   $('.atk2sB').append('Ranged: ' + player.rweapon);
+  $('.battleLog #pLog').html('<--------- What will you do?');
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
     $('.vsGG').append('Caesar ');
