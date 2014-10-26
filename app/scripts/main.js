@@ -221,17 +221,17 @@ $('body').on('click', '.atk1', function(event) { // stage one melee attack and r
     rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.melee(enemy1);
-  $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
+  $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
   if (enemy1.health > 0) {
     enemy1.melee(player);
     // $('.ggHP').css('padding-right','')
-    $('.battleLog #eLog').prepend(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+    $('.battleLog #eLog').html(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
     if (player.health <= 0) {
       $('.battleLog').prepend('You ded...');
       setTimeout(endGameLose, 2000);
     }
   } else {
-      $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+      $('.battleLog').html(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
       setTimeout(onStage1Clear,3000);
@@ -250,16 +250,16 @@ $('body').on('click', '.atk2', function(event) { // stage one ranged attack and 
     rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.ranged(enemy1);
-  $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy1.name + '. ');
+  $('.battleLog #pLog').html(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy1.name + '. ').addClass('greenText');
   if (enemy1.health > 0) {
     enemy1.ranged(player);
-    $('.battleLog #eLog').prepend(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+    $('.battleLog #eLog').html(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
     if (player.health <= 0) {
       $('.battleLog').prepend('You ded...');
       setTimeout(endGameLose, 4000);
     }
   } else {
-      $('.battleLog').prepend(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+      $('.battleLog').html(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
       setTimeout(onStage1Clear,3000);
@@ -309,13 +309,13 @@ $('body').on('click', '.atk1s2', function(event) { // stage two melee attack and
     rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.melee(enemy2);
-  $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy2.name + '. ').addClass('greenText');
+  $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy2.name + '. ').addClass('greenText');
   if (enemy2.health > 0) {
     enemy2.melee(player);
     // $('.ggHP').css('padding-right','')
-    $('.battleLog #eLog').prepend(enemy2.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+    $('.battleLog #eLog').html(enemy2.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
-      $('.battleLog').prepend(enemy2.name + ' is ded. ');
+      $('.battleLog').html(enemy2.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
       setTimeout(onStage2Clear,3000);
@@ -334,12 +334,12 @@ $('body').on('click', '.atk2s2', function(event) { // stage 2 range attack and r
     rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.ranged(enemy2);
-  $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy2.name + '. ');
+  $('.battleLog #pLog').html(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy2.name + '. ').addClass('greenText');
   if (enemy2.health > 0) {
     enemy2.ranged(player);
-    $('.battleLog #eLog').prepend(enemy2.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+    $('.battleLog #eLog').html(enemy2.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
-      $('.battleLog').prepend(enemy2.name + ' is ded. ');
+      $('.battleLog').html(enemy2.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
       setTimeout(onStage2Clear,3000); // waits two seconds and then renders post stage 2 screen
@@ -393,12 +393,12 @@ $('body').on('click', '.atk1sB', function(event) {
     rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.melee(enemyBoss);
-  $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemyBoss.name + '. ').addClass('greenText');
+  $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemyBoss.name + '. ').addClass('greenText');
   if (enemyBoss.health > 0) {
     enemyBoss.melee(player);
-    $('.battleLog #eLog').prepend(enemyBoss.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+    $('.battleLog #eLog').html(enemyBoss.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
-      $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
+      $('.battleLog').html(enemyBoss.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
       setTimeout(onBossClear,3000);
@@ -418,12 +418,12 @@ $('body').on('click', '.atk2sB', function(event) {
     rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.ranged(enemyBoss);
-  $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemyBoss.name + '. ');
+  $('.battleLog #pLog').html(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemyBoss.name + '. ').addClass('greenText');
   if (enemyBoss.health > 0) {
     enemyBoss.ranged(player);
-    $('.battleLog #eLog').prepend(enemyBoss.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ');
+    $('.battleLog #eLog').html(enemyBoss.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
   } else {
-      $('.battleLog').prepend(enemyBoss.name + ' is ded. ');
+      $('.battleLog').html(enemyBoss.name + ' is ded. ');
       $('.bgPic').fadeOut();
       $('.battleLog').prepend("You've Won! ");
       // waits two seconds and then renders post boss stage screen
