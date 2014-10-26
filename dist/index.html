@@ -16,14 +16,14 @@
   <body>
     <div class="container">
       <div class="headUnit"> <!-- header bar start -->
-        <h1>human vs. PLANTS</h1>
+        <h1><span>human</span> vs. PLANTS</h1>
       </div> <!-- header bar end -->
 
       <div class="viewPort"> <!-- main view -->
 
 <!-- +++++++++++ VIEWPORT +++++++++++++ This is where the templates populate +++++++++++++ VIEWPORT +++++++++++++++++++++++ -->
 
-        <button id="startButton" class="startButton">Start</button>
+        <button id="startButton" class="startButton">Fight Da Plants</button>
 
 
 
@@ -46,15 +46,15 @@
             <h2>PICK YOUR CHARACTER:</h2>
             <div class="caesar" id="caesar">
               <img class="profilePic" src="../images/caesar-headshot.jpg" />
-              <h4>Caesar</h4>
+              <h4 data-name="Julius" data-health="200" data-mdamage="15" data-rdamage="5" data-defense="10" data-mweapon="Sword" data-rweapon="Javalin">Caesar<img class="arrow" src="../images/arrow-right.png"></h4>
             </div>
-            <div class="abe">
+            <div class="abe" id="abe">
               <img class="profilePic" src="../images/lincoln-headshot.jpg" />
-              <h4>Abraham</h4>
+              <h4 data-name="Abe" data-health="150" data-mdamage="10" data-rdamage="15" data-defense="5" data-mweapon="Bayonet" data-rweapon="Rifle">Abraham<img class="arrow" src="../images/arrow-right.png"></h4>
             </div>
-            <div class="barbie">
+            <div class="barbie" id="barbie">
               <img class="profilePic" src="../images/barbie-headshot.jpeg" />
-              <h4>Barbie</h4>
+              <h4 data-name="Barbie" data-health="100" data-mdamage="5" data-rdamage="10" data-defense="15" data-mweapon="Yoga Kick" data-rweapon="HairSpray">Barbie<img class="arrow" src="../images/arrow-right.png"></h4>
             </div>
           </div> <!-- end character wrap -->
         </div> <!-- end character picker -->
@@ -64,29 +64,125 @@
         <div class="battleScreen"> <!-- Battle Screen Start -->
           <div class="battleUpper"> <!-- Upper portion of the Battle Screen -->
             <div class="ggBattle">
-              <div class="ggHP"><span></span></div>
-              <div><img class="ggPic" src="../images/caesar-headshot.jpg" /></div>
+              <div class="ggHP">
+                <span></span>
+              </div>
+              <div id="ggFightImg"></div>
             </div>
             <div class="stageSet">
               <h2>Stage 1</h2>
-              <h3>VS</h3>
+              <h3><ul><li class="vsGG"></li><li>VS</li><li class="vsBG"></li></ul></h3>
             </div>
             <div class="bgBattle">
-              <div class="bgHP"></div>
+              <div class="bgHP">
+                <span></span>
+              </div>
               <div><img class="bgPic" src="../images/plant1.png" alt=""></div>
             </div>
           </div> <!-- end of upper portion of the battle screen -->
           <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
             <div class="atkOptions">
-              <button class="atk1">Attack: Sword</button>
-              <button class="atk2">Attack: Javelin</button>
-            </div>
-            <div class="battleLog">
+              <button class="atk1" id="melee"></button>
+              <button class="atk2" id="ranged"></button>
+              <div class="battleLog">
+                <span id="pLog"></span><span id="eLog"></span>
+              </div>
             </div>
           </div><!-- end of lower portion of the battle screen -->
         </div> <!-- battle screen end -->
       </script>
 
+      <script type="text/template" id="postStageOne"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
+          <p>You managed to get past that scary, scary plant.</p>
+          <p>But, you see another one coming.... get ready!<span>|</span></p>
+        </div>
+      </script>
+
+      <script type="text/template" id="stageTwo">
+        <div class="battleScreen"> <!-- Battle Screen Start -->
+          <div class="battleUpper"> <!-- Upper portion of the Battle Screen -->
+            <div class="ggBattle">
+              <div class="ggHP">
+                <span></span>
+              </div>
+              <div id="ggFightImg"></div>
+            </div>
+            <div class="stageSet">
+              <h2>Stage 2</h2>
+              <h3><ul><li class="vsGG"></li><li>VS</li><li class="vsBG"></li></ul></h3>
+            </div>
+            <div class="bgBattle">
+              <div class="bgHP">
+                <span></span>
+              </div>
+              <div><img class="bgPic" src="../images/plant2.jpg" alt=""></div>
+            </div>
+          </div> <!-- end of upper portion of the battle screen -->
+          <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
+            <div class="atkOptions">
+              <button class="atk1s2" id="melee"></button>
+              <button class="atk2s2" id="ranged"></button>
+              <div class="battleLog">
+                <span id="pLog"></span><span id="eLog"></span>
+              </div>
+            </div>
+          </div><!-- end of lower portion of the battle screen -->
+        </div> <!-- battle screen end -->
+      </script>
+
+      <script type="text/template" id="postStageTwo"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
+          <p>That was a close one, it almost got you. I think you're safe.....</p>
+          <p>..............OMG WHAT IS THAT?!?!?!<span>|</span></p>
+        </div>
+      </script>
+
+      <script type="text/template" id="stageBoss">
+        <div class="battleScreen"> <!-- Battle Screen Start -->
+          <div class="battleUpper"> <!-- Upper portion of the Battle Screen -->
+            <div class="ggBattle">
+              <div class="ggHP">
+                <span></span>
+              </div>
+              <div id="ggFightImg"></div>
+            </div>
+            <div class="stageSet">
+              <h2>BOSS</h2>
+              <h3><ul><li class="vsGG"></li><li>VS</li><li class="vsBG"></li></ul></h3>
+            </div>
+            <div class="bgBattle">
+              <div class="bgHP">
+                <span></span>
+              </div>
+              <div><img class="bgPic" src="../images/plantBoss.jpg" alt=""></div>
+            </div>
+          </div> <!-- end of upper portion of the battle screen -->
+          <div class="battleLower"> <!-- Lower portion of the Battle Screen -->
+            <div class="atkOptions">
+              <button class="atk1sB" id="melee"></button>
+              <button class="atk2sB" id="ranged"></button>
+              <div class="battleLog">
+                <span id="pLog"></span><span id="eLog"></span>
+              </div>
+            </div>
+          </div><!-- end of lower portion of the battle screen -->
+        </div> <!-- battle screen end -->
+      </script>
+
+      <script type="text/template" id="postBoss"> <!-- provides introduction text after pressing start button -->
+        <div class="intro">
+          <p>Wow you're pretty good.</p>
+          <p>That's the end for now. I'll make sure the next levels are harder......<span>|</span></p>
+        </div>
+      </script>
+
+      <script type="text/template" id="endGameLose">
+        <div class="intro">
+          <p>You've got some work to do.</p>
+          <p>Make sure you don't find me if some killer plants roll up...<span>|</span></p>
+        </div>
+      </script>
 
     <!-- end template scripts -->
 
