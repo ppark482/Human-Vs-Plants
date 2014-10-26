@@ -97,8 +97,6 @@ $('body').on('click', '.caesar', function(event) { // User picks caesar
     rweapon: $('.caesar h4').data('rweapon')
   });
   event.preventDefault();
-  // $('.abe').css('display', 'none');
-  // $('.barbie').css('display', 'none');
   $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
   $('.abe img').removeClass('profilePicClicked').addClass('profilePic');
   $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
@@ -117,8 +115,6 @@ $('body').on('click', '.abe', function(event) { // User picks abe
     rweapon: $('.abe h4').data('rweapon')
   });
   event.preventDefault();
-  // $('.caesar').css('display', 'none');
-  // $('.barbie').css('display', 'none');
   $('.abe img').removeClass('profilePic').addClass('profilePicClicked');
   $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
   $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
@@ -137,8 +133,6 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
     rweapon: $('.barbie h4').data('rweapon')
   });
   event.preventDefault();
-  // $('.abe').css('display', 'none');
-  // $('.caesar').css('display', 'none');
   $('.barbie img').removeClass('profilePic').addClass('profilePicClicked');
   $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
   $('.abe img').removeClass('profilePicClicked').addClass('profilePic');
@@ -159,8 +153,6 @@ $('body').on('click', '.ready', function(event) {
   event.preventDefault();
   $('.viewPort').html(battleRender);
   $('.headUnit span').html('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
-  // $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</h4>');
-  // $('h1').append('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
   $('.atk1').append('Melee: ' + player.mweapon);
   $('.atk2').append('Ranged: ' + player.rweapon);
   if (player.name === 'Julius') {
