@@ -26,6 +26,10 @@ var Human = function(options) {
 
     // Mutates target's health by 'inflicted' amount
     enemy_health = target.health = target.health - (inflicted = (_.random(0, 15) + this.rdamage));
+    ofMaxHP = (inflicted/target.health); // percentage of damage dealt;
+    paddingDamage = ofMaxHP * 368; // amount to be taken away from hp padding value (adjusts length of hp bar)
+    newPadValue = 368 - paddingDamage;
+    $('.bgHP span').css('padding-right', newPadValue);
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
 
@@ -225,7 +229,7 @@ $( document ).ready(function() {
     });
     player.melee(enemy1);
     $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
-    $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
+    // $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
     if (enemy1.health > 0) {
       enemy1.melee(player);
       // $('.ggHP').css('padding-right','')
@@ -256,6 +260,7 @@ $('body').on('click', '.atk2', function(event) { // stage one ranged attack and 
   });
   player.ranged(enemy1);
   $('.battleLog #pLog').html(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy1.name + '. ').addClass('greenText');
+  // $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
   if (enemy1.health > 0) {
     enemy1.ranged(player);
     $('.battleLog #eLog').html(enemy1.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
@@ -317,6 +322,7 @@ $('body').on('click', '.atk1s2', function(event) { // stage two melee attack and
   });
   player.melee(enemy2);
   $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy2.name + '. ').addClass('greenText');
+  // $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
   if (enemy2.health > 0) {
     enemy2.melee(player);
     // $('.ggHP').css('padding-right','')
@@ -342,6 +348,7 @@ $('body').on('click', '.atk2s2', function(event) { // stage 2 range attack and r
   });
   player.ranged(enemy2);
   $('.battleLog #pLog').html(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy2.name + '. ').addClass('greenText');
+  // $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
   if (enemy2.health > 0) {
     enemy2.ranged(player);
     $('.battleLog #eLog').html(enemy2.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
@@ -403,6 +410,7 @@ $('body').on('click', '.atk1sB', function(event) {
   });
   player.melee(enemyBoss);
   $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemyBoss.name + '. ').addClass('greenText');
+  // $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
   if (enemyBoss.health > 0) {
     enemyBoss.melee(player);
     $('.battleLog #eLog').html(enemyBoss.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
@@ -428,6 +436,7 @@ $('body').on('click', '.atk2sB', function(event) {
   });
   player.ranged(enemyBoss);
   $('.battleLog #pLog').html(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemyBoss.name + '. ').addClass('greenText');
+  // $('.bgHP span').css('padding-right','368 - ' + paddingDamage);
   if (enemyBoss.health > 0) {
     enemyBoss.ranged(player);
     $('.battleLog #eLog').html(enemyBoss.name + ' fires back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
@@ -440,6 +449,4 @@ $('body').on('click', '.atk2sB', function(event) {
     }
 });
 
-/* Victory/Loss Logic
----------------------------------------------------------------------------------------------------*/
 }); /* Ready Wrapper */
