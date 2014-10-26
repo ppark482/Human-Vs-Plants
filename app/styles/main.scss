@@ -218,10 +218,40 @@ h4 {
 }
 .stageSet {
   display: inline-block;
-  margin: 60px auto;
+  margin: 60px 9px;
   text-align: center;
-  width: 25%;
+  width: 28%;
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  h2 {
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+  }
+  .vsGG, .vsBG {
+    font-size: 25px;
+  }
+  .vsGG {
+    color: lime;
+  }
+  .vsBG {
+    color: red;
+    animation-duration: 3s;
+    animation-name: fromRight;
+  }
 }
+@keyframes fromRight {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
 .bgBattle {
   display: inline-block;
   float: right;
@@ -266,12 +296,20 @@ h4 {
   height: 25%;
   display: block;
   margin-top: 10px;
+  margin-left: 66px;
   .atkOptions {
     clear: both;
     .atk1, .atk2, .atk1s2, .atk2s2, .atk1sB, .atk2sB {
       width: 150px;
       height: 50px;
       padding: 0;
+      background-image: url('../images/green.jpg');
+      border: 1px solid white;
+      color: white;
+      opacity: .8;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
@@ -282,7 +320,7 @@ h4 {
   color: lime;
   font-family: "Courier";
   width: 700px;
-  height: 180px;
+  height: 150px;
   display: block;
   float: right;
   overflow: scroll;
