@@ -32,7 +32,6 @@ var Human = function(options) {
     $('.bgHP span').css('padding-right', newPadValue);
     console.log('Damage inflicted = ' + inflicted);
     console.log('Enemy health = ' + target.health);
-
   };
   this.rdamage = options.rdamage;
   this.defense = options.defense;
