@@ -1,3 +1,4 @@
+$("document").ready(function() { /* Ready Wrapper */
 /* Creating Characters ---------------------------------------------------------------------------------------------------*/
 var inflicted, enemy_health;
 
@@ -84,7 +85,7 @@ $(window).keypress(function(k) {
 });
 /* On click of character
 ---------------------------------------------------------------------------------------------------*/
-var player, dataName, dataHealth, dataMdamage, dataRdamage, dataDefense;
+var player, dataName, dataHealth, dataMdamage, dataRdamage, dataDefense, dataMweapon, dataRweapon;
 
 $('body').on('click', '.caesar', function(event) { // User picks caesar
   player = new Human ({
@@ -119,7 +120,6 @@ $('body').on('click', '.abe', function(event) { // User picks abe
   $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
   $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
   $('.abe h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
-
 });
 
 $('body').on('click', '.barbie', function(event) { // user picks barbie
@@ -151,8 +151,8 @@ var battleTemplate = $('#battleScreen').html(),
 $('body').on('click', '.ready', function(event) {
   // Allows for clicking Character Name
   event.preventDefault();
-  $('.viewPort').html(battleRender);
   $('.headUnit span').html('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
+  $('.viewPort').html(battleRender);
   $('.atk1').append('Melee: ' + player.mweapon);
   $('.atk2').append('Ranged: ' + player.rweapon);
   $('.battleLog #pLog').html('<--------- What will you do?');
@@ -168,9 +168,8 @@ $('body').on('click', '.ready', function(event) {
         $('#ggFightImg').append(barbieImage);
         $('.vsGG').append('Barbie ');
         $('.vsBG').append(' ' + enemy1.name);
-        }
-  console.log(player);
-});
+       };
+  });
 
 
 /* Fight Logic Stage 1
@@ -189,47 +188,58 @@ var postStageOne = $('#postStageOne').html(),
       $('.viewPort').html(endGameLose);
     };
 
+// var updatingHealth = $('.headUnit span .invisible').data('health');
+
 var onStage1Clear = function () {
   // after clearing stage one, renders stage two
   $('.viewPort').html(postStageOne);
   setTimeout(stageTwoActivate,8000);
 };
-
 var enemy1 = new Plant({
   name: 'Vicious Vine Maple',
   health: 150,
   mdamage: 15,
   rdamage: 5
 });
-
-$('body').on('click', '.atk1', function(event) { // stage one melee attack and result
-  event.preventDefault();
-  player = new Human ({
-    name: $('.headUnit span .invisible').data('name'),
-    health: $('.headUnit span .invisible').data('health'),
-    mdamage: $('.headUnit span .invisible').data('mdamage'),
-    rdamage: $('.headUnit span .invisible').data('rdamage'),
-    defense: $('.headUnit span .invisible').data('defense'),
-    mweapon: $('.headUnit span .invisible').data('mweapon'),
-    rweapon: $('.headUnit span .invisible').data('rweapon')
+player = new Human ({
+  name: $('.headUnit span .invisible').data('name'),
+  health: $('.headUnit span .invisible').data('health'),
+  mdamage: $('.headUnit span .invisible').data('mdamage'),
+  rdamage: $('.headUnit span .invisible').data('rdamage'),
+  defense: $('.headUnit span .invisible').data('defense'),
+  mweapon: $('.headUnit span .invisible').data('mweapon'),
+  rweapon: $('.headUnit span .invisible').data('rweapon')
+});
+$( document ).ready(function() {
+    $('body').on('click', '.atk1', function(event) { // stage one melee attack and result
+    event.preventDefault();
+    player = new Human ({
+      name: $('.headUnit span .invisible').data('name'),
+      health: $('.headUnit span .invisible').data('health'),
+      mdamage: $('.headUnit span .invisible').data('mdamage'),
+      rdamage: $('.headUnit span .invisible').data('rdamage'),
+      defense: $('.headUnit span .invisible').data('defense'),
+      mweapon: $('.headUnit span .invisible').data('mweapon'),
+      rweapon: $('.headUnit span .invisible').data('rweapon')
+    });
+    player.melee(enemy1);
+    $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
+    $('.bgHP span').css('padding-right','350px');
+    if (enemy1.health > 0) {
+      enemy1.melee(player);
+      // $('.ggHP').css('padding-right','')
+      $('.battleLog #eLog').html(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
+      if (player.health <= 0) {
+        $('.battleLog').prepend('You ded...');
+        setTimeout(endGameLose, 2000);
+      }
+    } else {
+        $('.battleLog').html(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
+        $('.bgPic').fadeOut();
+        $('.battleLog').prepend("You've Won! ");
+        setTimeout(onStage1Clear,3000);
+      }
   });
-  player.melee(enemy1);
-  $('.battleLog #pLog').html(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
-  $('.bgHP span').css('padding-right','350px');
-  if (enemy1.health > 0) {
-    enemy1.melee(player);
-    // $('.ggHP').css('padding-right','')
-    $('.battleLog #eLog').html(enemy1.name + ' attacks back! It does ' + inflicted + ' damage to ' +  player.name + '. ').addClass('redText');
-    if (player.health <= 0) {
-      $('.battleLog').prepend('You ded...');
-      setTimeout(endGameLose, 2000);
-    }
-  } else {
-      $('.battleLog').html(enemy1.name + ' is ded. '); // need to edit style of log to make damage and actions different
-      $('.bgPic').fadeOut();
-      $('.battleLog').prepend("You've Won! ");
-      setTimeout(onStage1Clear,3000);
-    }
 });
 
 $('body').on('click', '.atk2', function(event) { // stage one ranged attack and result
@@ -429,3 +439,4 @@ $('body').on('click', '.atk2sB', function(event) {
 
 /* Victory/Loss Logic
 ---------------------------------------------------------------------------------------------------*/
+}); /* Ready Wrapper */
