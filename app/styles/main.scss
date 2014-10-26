@@ -120,6 +120,7 @@ h2 {
   width: 250px;
   height: 250px;
   border: 3px solid white;
+  cursor: pointer;
   filter: sepia(100%) blur(3px);
   &:hover {
     filter: sepia(0%) blur(0px);
@@ -136,14 +137,34 @@ h2 {
   display: inline-block;
   float: left;
   img {
+    cursor: pointer;
     transition: transform 1s, margin 1s;
+  }
+  h4 {
+    cursor: pointer;
+    transition: color .5s;
+    opacity: .2;
+    transition: opacity .5s, color .5s;
+    &:hover {
+      color: HSLA(74, 76%, 42%, 1);
+        opacity: 1;
+    }
   }
 }
 h4 {
   font-size: 1.5em;
   text-align: center;
   color: steelblue;
+  .arrow {
+    width: 60px;
+    height: 100%;
+    margin-left: 0;
+    border: none;
+    padding-top: 5px;
+    vertical-align: -24px;
+  }
 }
+
 
 /* Battle Screen ---------------------------------------------------------------------------------- */
 .battleUpper {
@@ -155,8 +176,9 @@ h4 {
 .ggBattle {
   display: inline-block;
   float: left;
-  width: 25%;
+  width: 33%;
   overflow: auto;
+  margin-left: 25px;
   .ggHP {
   	height: 20px;  /* Can be anything */
   	position: relative;
@@ -169,6 +191,7 @@ h4 {
   	-webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
   	-moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
   	box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
+    margin: 15px 0px 15px 15px;
   }
   .ggHP > span {
     width: 100%;
@@ -176,7 +199,8 @@ h4 {
     background-image: url('../images/green.jpg');
     margin-left: 0px;
     border-radius: 1em;
-    padding-right: 15em;
+    padding-right: 368px;
+    padding-bottom: 2px;
     position: relative;
     overflow: hidden;
     transition: padding .3s;
@@ -185,6 +209,10 @@ h4 {
     width: 250px;
     height: 250px;
     border: 3px solid white;
+    margin-left: 70px;
+    margin-bottom: 15px;
+    position: relative;
+
   }
 
 }
@@ -192,17 +220,46 @@ h4 {
   display: inline-block;
   margin: 60px auto;
   text-align: center;
-  width: 50%;
+  width: 25%;
 }
 .bgBattle {
   display: inline-block;
   float: right;
-  width: 25%;
+  width: 33%;
   overflow: auto;
+  margin-right: 25px;
+  .bgHP {
+    height: 20px;
+    position: relative;
+    background: #555;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    padding: 0px;
+    color: HSLA(0 , 0%, 0%, 0);
+    -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    -moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
+    box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
+    margin: 15px 15px 15px 0px;
+  }
+  .bgHP > span {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/green.jpg');
+    margin-left: 0px;
+    border-radius: 1em;
+    padding-right: 368px;
+    padding-bottom: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: padding .3s;
+  }
   .bgPic {
     width: 250px;
     height: 250px;
     border: 3px solid white;
+    margin-left: 70px;
+    margin-bottom: 15px;
   }
 }
 .battleLower {

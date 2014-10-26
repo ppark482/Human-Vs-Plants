@@ -76,9 +76,6 @@ $('#startButton').on('click', function() { // Start Button
 var charTemplate = $('#charPicker').html(),
     charRender = _.template(charTemplate);
 
-$('.profilePic').hover(function() {
-    $('h4').css('color', 'HSLA(0, 100%, 45%, 1)');
-});
 
 $(window).keypress(function(k) {
   if (k.keyCode === 13) {
@@ -100,10 +97,12 @@ $('body').on('click', '.caesar', function(event) { // User picks caesar
     rweapon: $('.caesar h4').data('rweapon')
   });
   event.preventDefault();
-  $('.abe').css('display', 'none');
-  $('.barbie').css('display', 'none');
+  // $('.abe').css('display', 'none');
+  // $('.barbie').css('display', 'none');
   $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
-  $('.caesar h4').text('Pick ' + player.name).addClass('ready');
+  $('.abe img').removeClass('profilePicClicked').addClass('profilePic');
+  $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
+  $('.caesar h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
 });
 
 $('body').on('click', '.abe', function(event) { // User picks abe
@@ -118,10 +117,13 @@ $('body').on('click', '.abe', function(event) { // User picks abe
     rweapon: $('.abe h4').data('rweapon')
   });
   event.preventDefault();
-  $('.caesar').css('display', 'none');
-  $('.barbie').css('display', 'none');
+  // $('.caesar').css('display', 'none');
+  // $('.barbie').css('display', 'none');
   $('.abe img').removeClass('profilePic').addClass('profilePicClicked');
-  $('.abe h4').text('Pick ' + player.name).addClass('ready');
+  $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
+  $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
+  $('.abe h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
+
 });
 
 $('body').on('click', '.barbie', function(event) { // user picks barbie
@@ -135,10 +137,12 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
     rweapon: $('.barbie h4').data('rweapon')
   });
   event.preventDefault();
-  $('.abe').css('display', 'none');
-  $('.caesar').css('display', 'none');
+  // $('.abe').css('display', 'none');
+  // $('.caesar').css('display', 'none');
   $('.barbie img').removeClass('profilePic').addClass('profilePicClicked');
-  $('.barbie h4').text('Pick ' + player.name).addClass('ready');
+  $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
+  $('.abe img').removeClass('profilePicClicked').addClass('profilePic');
+  $('.barbie h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
 });
 
 /* User Picks a Character to Use & Render Battle Screen Stage 1
@@ -154,16 +158,20 @@ $('body').on('click', '.ready', function(event) {
   // Allows for clicking Character Name
   event.preventDefault();
   $('.viewPort').html(battleRender);
-  $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</h4>');
-  $('h1').append('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
+  $('.headUnit span').html('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
+  // $('.ggHP').append('<h4 data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</h4>');
+  // $('h1').append('<span class="invisible" data-name="' + player.name + '" data-health="' + player.health + '" data-mdamage="'+ player.mdamage +'" data-rdamage="' + player.rdamage + '"data-defense="' + player.defense + '"data-mweapon="' + player.mweapon +'"data-rweapon="' + player.rweapon +'">' + player.name + '</span>');
   $('.atk1').append('Melee: ' + player.mweapon);
   $('.atk2').append('Ranged: ' + player.rweapon);
   if (player.name === 'Julius') {
     $('#ggFightImg').append(caesarImage);
+    $('.vsGG').append('Caesar ');
     } else if (player.name === 'Abe') {
       $('#ggFightImg').append(abeImage);
+      $('.vsGG').append('Abraham ');
       } else {
         $('#ggFightImg').append(barbieImage);
+        $('.vsGG').append('Barbie ');
         }
   console.log(player);
 });
@@ -201,13 +209,13 @@ var enemy1 = new Plant({
 $('body').on('click', '.atk1', function(event) { // stage one melee attack and result
   event.preventDefault();
   player = new Human ({
-    name: $('.ggHP h4').data('name'),
-    health: $('.ggHP h4').data('health'),
-    mdamage: $('.ggHP h4').data('mdamage'),
-    rdamage: $('.ggHP h4').data('rdamage'),
-    defense: $('.ggHP h4').data('defense'),
-    mweapon: $('.ggHP h4').data('mweapon'),
-    rweapon: $('.ggHP h4').data('rweapon')
+    name: $('.headUnit span .invisible').data('name'),
+    health: $('.headUnit span .invisible').data('health'),
+    mdamage: $('.headUnit span .invisible').data('mdamage'),
+    rdamage: $('.headUnit span .invisible').data('rdamage'),
+    defense: $('.headUnit span .invisible').data('defense'),
+    mweapon: $('.headUnit span .invisible').data('mweapon'),
+    rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.melee(enemy1);
   $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy1.name + '. ').addClass('greenText');
@@ -230,13 +238,13 @@ $('body').on('click', '.atk1', function(event) { // stage one melee attack and r
 $('body').on('click', '.atk2', function(event) { // stage one ranged attack and result
   event.preventDefault();
   player = new Human ({
-    name: $('.ggHP h4').data('name'),
-    health: $('.ggHP h4').data('health'),
-    mdamage: $('.ggHP h4').data('mdamage'),
-    rdamage: $('.ggHP h4').data('rdamage'),
-    defense: $('.ggHP h4').data('defense'),
-    mweapon: $('.ggHP h4').data('mweapon'),
-    rweapon: $('.ggHP h4').data('rweapon')
+    name: $('.headUnit span .invisible').data('name'),
+    health: $('.headUnit span .invisible').data('health'),
+    mdamage: $('.headUnit span .invisible').data('mdamage'),
+    rdamage: $('.headUnit span .invisible').data('rdamage'),
+    defense: $('.headUnit span .invisible').data('defense'),
+    mweapon: $('.headUnit span .invisible').data('mweapon'),
+    rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.ranged(enemy1);
   $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy1.name + '. ');
@@ -283,13 +291,13 @@ var stageTwoActivate = function () { // Renders stage two battle screen
 $('body').on('click', '.atk1s2', function(event) { // stage two melee attack and result
   event.preventDefault();
   player = new Human ({
-    name: $('h1 span').data('name'),
-    health: $('h1 span').data('health'),
-    mdamage: $('h1 span').data('mdamage'),
-    rdamage: $('h1 span').data('rdamage'),
-    defense: $('h1 span').data('defense'),
-    mweapon: $('h1 span').data('mweapon'),
-    rweapon: $('h1 span').data('rweapon')
+    name: $('.headUnit span .invisible').data('name'),
+    health: $('.headUnit span .invisible').data('health'),
+    mdamage: $('.headUnit span .invisible').data('mdamage'),
+    rdamage: $('.headUnit span .invisible').data('rdamage'),
+    defense: $('.headUnit span .invisible').data('defense'),
+    mweapon: $('.headUnit span .invisible').data('mweapon'),
+    rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.melee(enemy2);
   $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemy2.name + '. ').addClass('greenText');
@@ -308,13 +316,13 @@ $('body').on('click', '.atk1s2', function(event) { // stage two melee attack and
 $('body').on('click', '.atk2s2', function(event) { // stage 2 range attack and result
   event.preventDefault();
   player = new Human ({
-    name: $('h1 span').data('name'),
-    health: $('h1 span').data('health'),
-    mdamage: $('h1 span').data('mdamage'),
-    rdamage: $('h1 span').data('rdamage'),
-    defense: $('h1 span').data('defense'),
-    mweapon: $('h1 span').data('mweapon'),
-    rweapon: $('h1 span').data('rweapon')
+    name: $('.headUnit span .invisible').data('name'),
+    health: $('.headUnit span .invisible').data('health'),
+    mdamage: $('.headUnit span .invisible').data('mdamage'),
+    rdamage: $('.headUnit span .invisible').data('rdamage'),
+    defense: $('.headUnit span .invisible').data('defense'),
+    mweapon: $('.headUnit span .invisible').data('mweapon'),
+    rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.ranged(enemy2);
   $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemy2.name + '. ');
@@ -361,13 +369,13 @@ $('body').on('click', '.atk1sB', function(event) {
   // stage boss melee attack and result
   event.preventDefault();
   player = new Human ({
-    name: $('h1 span').data('name'),
-    health: $('h1 span').data('health'),
-    mdamage: $('h1 span').data('mdamage'),
-    rdamage: $('h1 span').data('rdamage'),
-    defense: $('h1 span').data('defense'),
-    mweapon: $('h1 span').data('mweapon'),
-    rweapon: $('h1 span').data('rweapon')
+    name: $('.headUnit span .invisible').data('name'),
+    health: $('.headUnit span .invisible').data('health'),
+    mdamage: $('.headUnit span .invisible').data('mdamage'),
+    rdamage: $('.headUnit span .invisible').data('rdamage'),
+    defense: $('.headUnit span .invisible').data('defense'),
+    mweapon: $('.headUnit span .invisible').data('mweapon'),
+    rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.melee(enemyBoss);
   $('.battleLog #pLog').prepend(player.name + ' attacks with a ' + player.mweapon + '. ' + player.name + ' does ' + inflicted + ' damage to ' +  enemyBoss.name + '. ').addClass('greenText');
@@ -386,13 +394,13 @@ $('body').on('click', '.atk2sB', function(event) {
   // stage boss range attack and result
   event.preventDefault();
   player = new Human ({
-    name: $('h1 span').data('name'),
-    health: $('h1 span').data('health'),
-    mdamage: $('h1 span').data('mdamage'),
-    rdamage: $('h1 span').data('rdamage'),
-    defense: $('h1 span').data('defense'),
-    mweapon: $('h1 span').data('mweapon'),
-    rweapon: $('h1 span').data('rweapon')
+    name: $('.headUnit span .invisible').data('name'),
+    health: $('.headUnit span .invisible').data('health'),
+    mdamage: $('.headUnit span .invisible').data('mdamage'),
+    rdamage: $('.headUnit span .invisible').data('rdamage'),
+    defense: $('.headUnit span .invisible').data('defense'),
+    mweapon: $('.headUnit span .invisible').data('mweapon'),
+    rweapon: $('.headUnit span .invisible').data('rweapon')
   });
   player.ranged(enemyBoss);
   $('.battleLog').prepend(player.name + ' uses a ' +  player.rweapon  + '. ' + player.name + ' does ' + inflicted + ' damage to ' + enemyBoss.name + '. ');
