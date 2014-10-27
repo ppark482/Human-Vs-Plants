@@ -105,7 +105,7 @@ $charMargin: 67px;
 }
 .charWrap {
   margin: 0 auto;
-  overflow: auto;
+  overflow: hidden;
   img {
     margin-right: $charMargin;
     margin-left: $charMargin;
@@ -199,7 +199,7 @@ h4 {
     background-image: url('../images/green.jpg');
     margin-left: 0px;
     border-radius: 1em;
-    padding-right: 368px;
+    padding-right: 367px;
     padding-bottom: 2px;
     position: relative;
     overflow: hidden;
@@ -278,7 +278,7 @@ h4 {
     background-image: url('../images/green.jpg');
     margin-left: 0px;
     border-radius: 1em;
-    padding-right: 368px;
+    padding-right: 367px;
     padding-bottom: 2px;
     position: relative;
     overflow: hidden;
