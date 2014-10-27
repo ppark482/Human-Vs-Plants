@@ -14,11 +14,11 @@ var Human = function(options) {
     paddingDamage = ofMaxHP * 368; // amount to be taken away from hp padding value (adjusts length of hp bar)
     newPadValue = 368 - paddingDamage;
     $('.bgHP span').css('padding-right', newPadValue);
-    console.log('Damage inflicted = ' + inflicted);
-    console.log('Enemy health = ' + target.health);
-    console.log(ofMaxHP);
-    console.log(paddingDamage);
-    console.log(newPadValue);
+    // console.log('Damage inflicted = ' + inflicted);
+    // console.log('Enemy health = ' + target.health);
+    // console.log(ofMaxHP);
+    // console.log(paddingDamage);
+    // console.log(newPadValue);
 
   };
   this.mdamage = options.mdamage;
@@ -30,8 +30,8 @@ var Human = function(options) {
     paddingDamage = ofMaxHP * 368; // amount to be taken away from hp padding value (adjusts length of hp bar)
     newPadValue = 368 - paddingDamage;
     $('.bgHP span').css('padding-right', newPadValue);
-    console.log('Damage inflicted = ' + inflicted);
-    console.log('Enemy health = ' + target.health);
+    // console.log('Damage inflicted = ' + inflicted);
+    // console.log('Enemy health = ' + target.health);
   };
   this.rdamage = options.rdamage;
   this.defense = options.defense;
@@ -47,8 +47,11 @@ var Plant = function(options) {
 
     // Mutates target's health by 'inflicted' amount
     target.health = target.health - (inflicted = (_.random(5, 10) + this.mdamage));
-    console.log('Damage inflicted = ' + inflicted);
-    console.log('Player health = ' + target.health);
+    ofMaxHP = (inflicted/target.health);
+    paddingDamage = ofMaxHP * 368;
+    target.health = (target.health - paddingDamage);
+    // console.log('Damage inflicted = ' + inflicted);
+    // console.log('Player health = ' + target.health);
 
   };
   this.mdamage = options.mdamage;
