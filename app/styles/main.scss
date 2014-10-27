@@ -100,7 +100,8 @@ $charMargin: 67px;
 .charPicker {
   display: block;
   position: relative;
-  width: 100%;
+  width: 1200px;
+  overflow: hidden;
 }
 .charWrap {
   margin: 0 auto;
