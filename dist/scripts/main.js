@@ -113,7 +113,7 @@ $('body').on('click', '.caesar', function(event) { // User picks caesar
   $('.caesar img').removeClass('profilePic').addClass('profilePicClicked');
   $('.abe img').removeClass('profilePicClicked').addClass('profilePic');
   $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
-  $('.caesar h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
+  $('.caesar h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="images/arrow-right.png">');
 });
 
 $('body').on('click', '.abe', function(event) { // User picks abe
@@ -131,7 +131,7 @@ $('body').on('click', '.abe', function(event) { // User picks abe
   $('.abe img').removeClass('profilePic').addClass('profilePicClicked');
   $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
   $('.barbie img').removeClass('profilePicClicked').addClass('profilePic');
-  $('.abe h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
+  $('.abe h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="images/arrow-right.png">');
 });
 
 $('body').on('click', '.barbie', function(event) { // user picks barbie
@@ -148,16 +148,16 @@ $('body').on('click', '.barbie', function(event) { // user picks barbie
   $('.barbie img').removeClass('profilePic').addClass('profilePicClicked');
   $('.caesar img').removeClass('profilePicClicked').addClass('profilePic');
   $('.abe img').removeClass('profilePicClicked').addClass('profilePic');
-  $('.barbie h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="../images/arrow-right.png">');
+  $('.barbie h4').text('Pick ' + player.name).addClass('ready').append('<img class="arrow" src="images/arrow-right.png">');
 });
 
 /* User Picks a Character to Use & Render Battle Screen Stage 1
 ---------------------------------------------------------------------------------------------------*/
 var battleTemplate = $('#battleScreen').html(),
     battleRender = _.template(battleTemplate),
-    caesarImage = ('<img class="ggPic" src="../images/caesar-headshot.jpg" />'),
-    abeImage = ('<img class="ggPic" src="../images/lincoln-headshot.jpg" />'),
-    barbieImage = ('<img class="ggPic" src="../images/barbie-headshot.jpeg" />');
+    caesarImage = ('<img class="ggPic" src="images/caesar-headshot.jpg" />'),
+    abeImage = ('<img class="ggPic" src="images/lincoln-headshot.jpg" />'),
+    barbieImage = ('<img class="ggPic" src="images/barbie-headshot.jpeg" />');
 
 
 $('body').on('click', '.ready', function(event) {
