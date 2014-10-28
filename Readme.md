@@ -1,3 +1,7 @@
-## Yo, I'm a Readme
+## human vs Plants
 
-You should probably update me so people looking at your code have an idea what it is being used for :)
+# As the lone survivor of a vegetation-outbreak, fight your way out and survive!
+
+# Libraries Used:
+* underscore.js
+* jQuery
