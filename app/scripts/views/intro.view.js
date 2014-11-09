@@ -1,7 +1,4 @@
-(function() {
-
-
-
+(function(){
 
 
 }()); // end of IIF
